@@ -189,7 +189,8 @@ svgpong = function() {
   scored(); // Setup
 
   var animate = function() {
-    var suspense = field.suspendRedraw(6000);
+    var suspense = field.pauseAnimations(6000);
+    // var suspense = field.suspendRedraw(6000);
 
     var anim_factor = clock.reset() * animSpeed
     ball.cx += ball.dx * anim_factor;
@@ -247,6 +248,7 @@ svgpong = function() {
       ball.dy *= -1;
     }
     field.unsuspendRedraw(suspense);
+    field.unpauseAnimations(suspense);
     requestAnimationFrame(animate);
   }
 
