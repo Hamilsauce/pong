@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>new pipe</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="./style.css" />
+  <style type="text/css" media="all">
+    input.vertical {
+      -webkit-appearance: slider-vertical;
+      writing-mode: bt-lr;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="app-header">Hi</div>
+    <div class="app-body">
+    </div>
+    <!--    <svg id="game-container" width="380" height="400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+            <path id="smallGridPath" d="M 8 0 H 0 V 8" fill="none" stroke="gray" stroke-width="0.5" />
+          </pattern>
+          <pattern id="largeGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+            <rect class="draggabl" id="largeGridRect" width="80" height="80" fill="url(#smallGrid)" />
+            <path class="draggabl" id="largeGridPath" d="M 80 0 H 0 V 80" fill="none" stroke="gray" stroke-width="2" />
+          </pattern>
+        </defs>
+        <g id="surface" class="draggable" transform="translate(0, 0)" x="-80" y="-80" width="2961" height="2641">
+          <rect class="draggabl" id="grid" x="-80" y="-80" width="900" height="2641" fill="url(#largeGrid)" />
+        </g>
+        <g id="objects" class="draggabl" transform="translate(0, 0)" x="-80" y="-80" width="2961" height="2641">
+          <rect id="paddle-left" x="0%" y="50%" width="35" height="100" fill="blue" />
+          <rect id="paddle-right" x="90%" y="50%" width="35" height="100" fill="red" />
+          <circle cx="50%" cy="50%" r="20" fill="green"></circle>
+        </g>
+      </svg>
+    </div> -->
+    <!-- <div id="controls1">
+      <svg id="controls" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <g class="slider-group" widh="50" heght="120">
+          <g class="slider-bar" widh="50" heght="120">
+            <rect class="slider-rect" x="50%" y="10%" width="14" height="180" fill="gray" id="slider-left" name="slider-left"></rect>
+          </g>
+          <g class="slider-handle" widh="50" heght="120">
+            <circle class="slider-circle" cx="52%" cy="50%" r="18" fill="green"></circle>
+          </g>
+        </g>
+        <div class="slider-container">
+        <input class="slider-control" id="slider-right" type="range" name="slider-right" value="50" />
+        <div class="slider-value-output">
+        </div>
+      </div>
+      </svg>
+    </div> -->
+    <svg id="invader" xmlns="https://www.w3.org/2000/svg" viewBox="35.4 35.4 195.8 141.8">
+  <!-- invader images: https://github.com/rohieb/space-invaders !-->
+  <style>/* <![CDATA[ */
+    path {
+      stroke-width: 0;
+      fill: #080;
+    }
+
+    path:hover {
+      fill: #c00;
+    }
+  /* ]]> */</style>
+  <path d="M70.9 35.4v17.8h17.7V35.4H70.9zm17.7 17.8v17.7H70.9v17.7H53.2V53.2H35.4V124h17.8v17.7h17.7v17.7h17.7v-17.7h88.6v17.7h17.7v-17.7h17.7V124h17.7V53.2h-17.7v35.4h-17.7V70.9h-17.7V53.2h-17.8v17.7H106.3V53.2H88.6zm88.6 0h17.7V35.4h-17.7v17.8zm17.7 106.2v17.8h17.7v-17.8h-17.7zm-124 0H53.2v17.8h17.7v-17.8zm17.7-70.8h17.7v17.7H88.6V88.6zm70.8 0h17.8v17.7h-17.8V88.6z"/>
+  <path d="M319 35.4v17.8h17.6V35.4H319zm17.6 17.8v17.7H319v17.7h-17.7v17.7h-17.7V159.4h17.7V124h17.7v35.4h17.7v-17.7H425.2v17.7h17.7V124h17.7v35.4h17.7V106.3h-17.7V88.6H443V70.9h-17.7V53.2h-17.7v17.7h-53.2V53.2h-17.7zm88.6 0h17.7V35.4h-17.7v17.8zm0 106.2h-35.5v17.8h35.5v-17.8zm-88.6 0v17.8h35.5v-17.8h-35.5zm0-70.8h17.7v17.7h-17.7V88.6zm70.9 0h17.7v17.7h-17.7V88.6z"/>
+  <script>/* <![CDATA[ */
+    const
+      viewX = [35.4, 283.6],
+      animationDelay = 500,
+      invader = document.getElementById('invader');
+
+    let frame = 0;
+
+    setInterval(() => {
+      frame = ++frame % 2;
+      invader.viewBox.baseVal.x = viewX[frame];
+    }, animationDelay);
+
+  /* ]]> */</script>
+</svg>
+    <div id="controls">
+      <div class="slider-container">
+        <input class="slider-control vertical" id="slider-left" type="range" name="slider-left" value="50" />
+        <div class="slider-value-output">
+        </div>
+      </div>
+      <div class="slider-container">
+        <input class="slider-control" id="slider-right" type="range" name="slider-right" value="50" />
+        <div class="slider-value-output">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+  </script>
+  <script src="./script.js" type="module"></script>
+</body>
+
+</html>
