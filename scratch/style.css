@@ -76,10 +76,11 @@ body {
   fill: #EAD36090;
   filter: invert(100%);
   /* transition: 0.1s; */
-
-
-
 }
+.paddle {
+  fill: #18181890;
+}
+
 .text-node {
   stroke: #FFFFFF;
   fill: #252222;

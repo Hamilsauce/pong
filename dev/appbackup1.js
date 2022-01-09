@@ -13,37 +13,55 @@ export class Game {
     this.scene$;
     this.sliders = sliderConfig
       .reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {});
-    this.outOfBounds = false
-    this.paddleLeft = new Paddle(this.root, this.boardGroup, 'leftPaddle', { input$: this.sliders.left.value$, side: 'left', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, });
-    this.paddleRight = new Paddle(this.root, this.boardGroup, 'rightPaddle', { input$: this.sliders.right.value$, side: 'right', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, });
+
+    this.paddleLeft = new Paddle(this.root, this.root.querySelector('#leftPaddleGroup'), { input$: this.sliders.left.value$, height: 100, boardHeight: 425, width: 25, });
+    this.paddleRight = new Paddle(this.root, this.root.querySelector('#rightPaddleGroup'), { input$: this.sliders.right.value$, height: 100, boardHeight: 400, boardWidth: window.innerWidth, width: 25, });
     this.ball = new Ball(this.root, this.boardGroup, this.paddles$, { input$: null, r: 8, boardHeight: 400, boardWidth: 384 })
+    console.log('this.ball.position$', this.ball.position$)
+    // this.ball.position$.subscribe(console.log)
+    console.log('game', this);
     this.init();
 
   };
 
   detectCollision({ paddleLeft, paddleRight, ball }) {
-    const paddleLeftBox = paddleLeft.getBoundingClientRect()
-    const paddleRightBox = paddleRight.getBoundingClientRect()
-    const ballBox = ball.getBoundingClientRect()
-
-    const hitBoundsLeft = ballBox.left <= paddleLeftBox.right;
-    const hitPaddleLeft = hitBoundsLeft && (ballBox.bottom >= paddleLeftBox.top && ballBox.top <= paddleLeftBox.bottom);
-    const hitBoundsRight = ballBox.right >= paddleRightBox.left
-    const hitPaddleRight = hitBoundsRight && (ballBox.bottom >= paddleRightBox.top && ballBox.top <= paddleRightBox.bottom);
-
-    if (hitPaddleLeft) {
+    const pads = [paddleLeft, paddleRight]
+    // console.log('balvl.cx + ball.r >= paddleRight.x ', ball.cx, ball.r, paddleRight.x)
+    const poo = ball.cx - ball.r
+    // console.log('poo', paddleLe,ft)
+    // const adjustedX = (ball.cx + (ball.r) * 2) / (384 / 2)) * 100
+  // console.log((
+  //     ball.cx - ball.r <= paddleLeft.x + 50// &&
+  //     // (ball.cy + ball.r <= paddleLeft.top &&
+  //       // ball.cy - ball.r >= paddleLeft.bottom)
+  //   ));
+    if (
+      (
+        ball.cx - ball.r <= paddleLeft.x + 50 //&&
+        // (ball.cy + ball.r <= paddleLeft.top &&
+          // ball.cy - ball.r >= paddleLeft.bottom)
+      )
+    ) {
       this.ball.directionX = 'right'
-      console.log('right');
-    } else if (hitPaddleRight) {
-      this.ball.directionX = 'left'
-      console.log('left');
-    } else if (hitBoundsLeft || hitBoundsRight) {
-      this.outOfBounds = !this.outOfBounds
-      // this.boardGroupPause = pauseAnimations(6000)
-      // this.animations.pauseAnimations()
+      console.log('fail!');
     }
-    console.log('going');
+    if (
+      (
+        ((ball.cx + (ball.r)) / (384 / 2)) * 100 >= paddleRight.x - 25 //&&
+        // (ball.cy + ball.r <= paddleRight.top &&
+        // ball.cy - ball.r >= paddleRight.bottom)
+      )
+    ) {
+      // console.table( paddleRight.x,ball.cx, ball.r )
+      this.ball.directionX = 'left'
+      // this.ball.changeX = -ball.changeX
+      console.log('got em right');
 
+    } else {
+      // console.log('paddleLeft, paddleRight, ball', paddleLeft, paddleRight, ball)
+      // console.log('got em');
+
+    }
   }
 
 
@@ -55,10 +73,8 @@ export class Game {
       (paddleLeft, paddleRight, ball) => ({ paddleLeft, paddleRight, ball })
     ).pipe(
       sampleTime(40),
-      takeWhile(() => !this.outOfBounds)
       // takeWhile(({ spaceship, enemies }) => this.gameOver(spaceship, enemies) === false)
     );
-
     this.scene$.subscribe(this.detectCollision.bind(this))
 
   }
