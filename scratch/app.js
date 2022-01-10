@@ -10,6 +10,8 @@ export class Game {
   constructor(selector, sliderConfig) {
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
+    this._x;
+    this._y;
     this.scene$;
     this.sliders = sliderConfig
       .reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {});
@@ -25,24 +27,35 @@ export class Game {
     const paddleLeftBox = paddleLeft.getBoundingClientRect()
     const paddleRightBox = paddleRight.getBoundingClientRect()
     const ballBox = ball.getBoundingClientRect()
+    console.log('ballBox', ballBox)
 
     const hitBoundsLeft = ballBox.left <= paddleLeftBox.right;
-    const hitPaddleLeft = hitBoundsLeft && (ballBox.bottom >= paddleLeftBox.top && ballBox.top <= paddleLeftBox.bottom);
     const hitBoundsRight = ballBox.right >= paddleRightBox.left
+
+    const hitPaddleLeft = hitBoundsLeft && (ballBox.bottom >= paddleLeftBox.top && ballBox.top <= paddleLeftBox.bottom);
     const hitPaddleRight = hitBoundsRight && (ballBox.bottom >= paddleRightBox.top && ballBox.top <= paddleRightBox.bottom);
 
+    const hitWallTop = ballBox.top > this.x
+    const hitWallBottom = hitBoundsRight && (ballBox.bottom >= paddleRightBox.top && ballBox.top <= paddleRightBox.bottom);
+    // console.log('hitWallTop', +this.boardGroup.getAttribute('x'))
     if (hitPaddleLeft) {
       this.ball.directionX = 'right'
-      console.log('right');
+      if (ball.y - paddleLeftBox.y > 0) {
+        this.ball.directionY = 1;
+
+      } else {
+        this.ball.directionY = -1
+
+      }
     } else if (hitPaddleRight) {
       this.ball.directionX = 'left'
-      console.log('left');
     } else if (hitBoundsLeft || hitBoundsRight) {
       this.outOfBounds = !this.outOfBounds
-      // this.boardGroupPause = pauseAnimations(6000)
-      // this.animations.pauseAnimations()
     }
-    console.log('going');
+
+
+
+
 
   }
 
@@ -64,8 +77,10 @@ export class Game {
   }
 
 
-  get prop() { return this._prop; };
-  set prop(newValue) { this._prop = newValue; };
+  get x() { return +this.boardGroup.getAttribute('x') };
+  set x(newValue) {+this.boardGroup.setAttribute('x', newValue) };
+  get y() { return +this.boardGroup.getAttribute('y') };
+  set y(newValue) {+this.boardGroup.setAttribute('y', newValue) };
 }
 
 const sliderConfig = [

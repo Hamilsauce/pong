@@ -30,6 +30,7 @@ export class Ball {
     this.root.setAttribute('r', this.config.r)
     this.root.setAttribute('fill', 'red')
     this.directionX = 'left'
+    this.directionY = 1;
 
 
     this.ballTransforms = this.root.transform.baseVal;
@@ -51,28 +52,27 @@ export class Ball {
   }
 
   animate() {
-    this.changeY += 0
+    // this.changeY = this.directionY +  (+this.board.getAttribute('height') / 2) //- this.directionY 
     if (this.directionX === 'left') {
       this.changeX -= 3
+      // this.changeY += 0.3
+      this.changeY =  (this.directionY + 0.3)
 
     } else if (this.directionX === 'right') {
       this.changeX += 3
-// this.root.
-
-const poop =pauseAnimations(600)
+      this.changeY =  (this.directionY + 0.3)
+      
     }
-    // this.updatePosition(this.changeX, this.changeY)
-
     this.ballTranslate.setTranslate(this.changeX, this.changeY);
     this.position$.next(this.root)
-    // this.position$.next(this.root.getBoundingClientRect())
     requestAnimationFrame(this.animate.bind(this))
   }
 
   updatePosition(cx = this.originX, cy = this.originY, ) {
     /* NOTE: Returns the center Y of the paddle in px*/
-    const changedY = (Math.abs(cy) * this.originY) / 100; //- (this.config.height / 2)
+    const changedY = ((Math.abs(cy) * this.originY) / 100)+ 1; //- (this.config.height / 2)
     const changedX = (Math.abs(cx) * this.originX) / 100; //- (this.config.height / 2)
+ console.log('changedY', changedY)
     // if (cx > 0) {
     //   this.position = {
     //     cx: changedX,
@@ -88,7 +88,7 @@ const poop =pauseAnimations(600)
     //     r: this.config.r,
     //   }
     // }
-    return cx > 0 ? changedX : -changedX
+    return {cx: cx > 0 ? changedX : -changedX,cy: changedY}
   }
 
   // updatePosition(cx = this.originX, cy = this.originY, ) {
@@ -127,7 +127,7 @@ const poop =pauseAnimations(600)
   move(pos) {
     const perc = this.updatePosition(pos)
     this.transform = this.ballTransforms.getItem(0);
-    this.transform.setTranslate(0, perc)
+    this.transform.setTranslate(perc.x, perc.y)
   }
 
   endMove(evt) { this.selected = null }

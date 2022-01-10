@@ -10,7 +10,6 @@ svgpong = function() {
       window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
   })();
-
   // Wrap SVG elements for easier access
 
   function wrapPaddle(name) {
