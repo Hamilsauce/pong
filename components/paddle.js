@@ -40,7 +40,7 @@ export class Paddle {
       this.paddleTranslate.setTranslate(0, 0);
       this.paddleTransforms.insertItemBefore(this.paddleTranslate, 0);
     }
-    this.input$.pipe(tap(this.move.bind(this))).subscribe()
+    this.input$.pipe(tap(this.move)).subscribe()
     this.boardGroup.appendChild(this.rect)
     this._y;
   }
@@ -67,7 +67,8 @@ export class Paddle {
   move(yVal) {
     this.transform = this.paddleTransforms.getItem(0);
     this.transform.setTranslate(this.originX, this.updatePosition(yVal))
-    this.position$.next(this.rect)
+   console.log('this.hitbox', this.hitbox)
+    this.position$.next(this.hitbox)
   }
 
   endMove(evt) { this.selected = null }
@@ -86,7 +87,12 @@ export class Paddle {
     };
   }
 
+ 
   set position(val) {
+    this.position$.next(val)
+  }
+  get hitbox() {
+    return this.root.getBoundingClientRect()
     this.position$.next(val)
   }
 

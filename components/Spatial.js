@@ -1,7 +1,7 @@
 const { iif, Observable, BehaviorSubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
 const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
-export class Ball {
+export class Spatial {
   constructor(parentSvg, boardGroup, paddles$, config = { input$: null, boardHeight: 400 }) {
     this.parentSvg = parentSvg;
     this.boardGroup = boardGroup;
@@ -23,12 +23,12 @@ export class Ball {
     this.root.setAttribute('fill', 'red')
     this.directionX = 'left'
     this.directionY = this.board.getAttribute('height') / 2
-    this.ballTransforms = this.root.transform.baseVal;
+    this.SpatialTransforms = this.root.transform.baseVal;
 
-    if (this.ballTransforms.length === 0) {
-      this.ballTranslate = this.parentSvg.createSVGTransform();
-      this.ballTranslate.setTranslate(this.originX, this.originY);
-      this.ballTransforms.insertItemBefore(this.ballTranslate, 0);
+    if (this.SpatialTransforms.length === 0) {
+      this.SpatialTranslate = this.parentSvg.createSVGTransform();
+      this.SpatialTranslate.setTranslate(this.originX, this.originY);
+      this.SpatialTransforms.insertItemBefore(this.SpatialTranslate, 0);
     }
     this.boardGroup.appendChild(this.root);
     this.position$ = new Subject();
@@ -44,17 +44,17 @@ export class Ball {
   animate() {
     if (this.directionX === 'left') {
       this.directionY = this.directionY +  -0.1
-      this.changeX -= 1.2
+      this.changeX -= 0.6
       this.changeY =  (this.directionY)
 
     } else if (this.directionX === 'right') {
       this.directionY += this.directionY +0.1
-      this.changeX = 1.2
+      this.changeX = 0.6
       this.changeY = this.directionY //+ 1.2// (this.directionY)
       
     }
-    this.ballTranslate.setTranslate(this.changeX, this.changeY);
-    this.position$.next(this.hitbox)
+    this.SpatialTranslate.setTranslate(this.changeX, this.changeY);
+    this.position$.next(this.root)
     requestAnimationFrame(this.animate.bind(this))
   }
 
@@ -67,7 +67,7 @@ export class Ball {
 
   move(pos) {
     const perc = this.updatePosition(pos)
-    this.transform = this.ballTransforms.getItem(0);
+    this.transform = this.SpatialTransforms.getItem(0);
     this.transform.setTranslate(perc.x, perc.y)
   }
 
@@ -105,5 +105,5 @@ export class Ball {
 }
 
 {
-  Ball
+  Spatial
 }

@@ -21,43 +21,84 @@ export class Game {
     this.ball = new Ball(this.root, this.boardGroup, this.paddles$, { input$: null, r: 8, boardHeight: 400, boardWidth: 384 })
     this.init();
 
+    // this.convert = this.makeAbsoluteContext(elem, svgDoc);
+    // this.absoluteCenter = this.convert(middleX, middleY);
+
   };
 
+
+  convertCoords(x, y, elem) {
+    var offset = this.root.getBoundingClientRect();
+    var matrix = elem.getScreenCTM();
+
+    return {
+      x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
+      y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
+    };
+  }
+
+  create(parent, name, attrs, text) {
+    var el = document.createElementNS(this.root.namespaceURI, name);
+    for (let attr in attrs) {
+      if (!attrs.hasOwnProperty(attr)) continue;
+
+      const splitProp = attr.split(':');
+      if (splitProp[1]) el.setAttributeNS(parent.getAttribute('xmlns:' + splitProp[0]), splitProp[1], attrs[attr]);
+      else el.setAttribute(attr, attrs[attr]);
+    }
+    if (text) el.appendChild(document.createTextNode(text));
+    return parent.appendChild(el);
+  }
+
+
   detectCollision({ paddleLeft, paddleRight, ball }) {
+    // const paddleLeft = paddleLeft.getBoundingClientRect()
+    // const paddleRight = paddleRight.getBoundingClientRect()
+    // const ball = ball.getBoundingClientRect()
+    console.log('ball, paddleLeft.getBoundingClientRect(), paddleRight.getBoundingClientRect()')
+    console.log(ball, paddleLeft.getBoundingClientRect(), paddleRight.getBoundingClientRect())
+
     const paddleLeftBox = paddleLeft.getBoundingClientRect()
     const paddleRightBox = paddleRight.getBoundingClientRect()
-    const ballBox = ball.getBoundingClientRect()
-    console.log('ballBox', ballBox)
+    // console.log('yt');
+    const hitBoundsLeft = ball.left <= paddleLeftBox.right;
+    const hitBoundsRight = ball.right >= paddleRightBox.left
 
-    const hitBoundsLeft = ballBox.left <= paddleLeftBox.right;
-    const hitBoundsRight = ballBox.right >= paddleRightBox.left
+    // console.log('hitBoundsRight', hitBoundsRight)
+    // console.log('paddleRightBox', paddleRightBox)
 
-    const hitPaddleLeft = hitBoundsLeft && (ballBox.bottom >= paddleLeftBox.top && ballBox.top <= paddleLeftBox.bottom);
-    const hitPaddleRight = hitBoundsRight && (ballBox.bottom >= paddleRightBox.top && ballBox.top <= paddleRightBox.bottom);
+    const hitPaddleLeft = hitBoundsLeft && (ball.bottom >= paddleLeftBox.top && ball.top <= paddleLeftBox.bottom);
+    const hitPaddleRight = hitBoundsRight && (ball.bottom >= paddleRightBox.top && ball.top <= paddleRightBox.bottom);
 
-    const hitWallTop = ballBox.top > this.x
-    const hitWallBottom = hitBoundsRight && (ballBox.bottom >= paddleRightBox.top && ballBox.top <= paddleRightBox.bottom);
-    // console.log('hitWallTop', +this.boardGroup.getAttribute('x'))
+    console.log('hitPaddleLeft hitPaddleRight', hitPaddleLeft, hitPaddleRight)
+    // const hitWallTop = ball.top > this.x
+    // const hitWallBottom = hitBoundsRight && (ball.bottom >= paddleRight.top && ball.top <= paddleRight.bottom);
+
     if (hitPaddleLeft) {
       this.ball.directionX = 'right'
-      if (ball.y - paddleLeftBox.y > 0) {
-        this.ball.directionY = 1;
+      // if (ball.y - paddleLeft.y > 0) {
+      this.ball.directionY = 1;
+      console.log('HIT PADDLE LEFT', this.ball)
 
-      } else {
-        this.ball.directionY = -1
+      // } else {
+      this.ball.directionY = -1
 
-      }
+      // }
     } else if (hitPaddleRight) {
+      console.log('HIT PADDLE RIGHT', )
       this.ball.directionX = 'left'
     } else if (hitBoundsLeft || hitBoundsRight) {
+      console.log('outOfBounds')
       this.outOfBounds = !this.outOfBounds
     }
-
-
-
-
-
   }
+  
+  animate() {
+    this.ballTranslate.setTranslate(this.changeX, this.changeY);
+    this.position$.next(this.hitbox)
+    requestAnimationFrame(this.animate.bind(this))
+  }
+
 
 
   init() {
@@ -68,20 +109,52 @@ export class Game {
       (paddleLeft, paddleRight, ball) => ({ paddleLeft, paddleRight, ball })
     ).pipe(
       sampleTime(40),
-      takeWhile(() => !this.outOfBounds)
-      // takeWhile(({ spaceship, enemies }) => this.gameOver(spaceship, enemies) === false)
+      takeWhile(() => !this.outOfBounds),
+      tap(x => console.log('x', x)),
+      map(({ paddleLeft, paddleRight, ball }) => {
+        console.log('{ paddleLeft, paddleRight, ball }', paddleLeft, paddleRight, ball )
+        return { paddleLeft:this.conver , paddleRight:this.conver , ball:this.conver  }
+      }),
     );
 
     this.scene$.subscribe(this.detectCollision.bind(this))
 
   }
 
+  makeAbsoluteContext(element, svgDocument) {
+    return function(x, y) {
+      var offset = svgDocument.getBoundingClientRect();
+      var matrix = element.getScreenCTM();
+      return {
+        x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
+        y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
+      };
+    };
+  }
 
   get x() { return +this.boardGroup.getAttribute('x') };
   set x(newValue) {+this.boardGroup.setAttribute('x', newValue) };
   get y() { return +this.boardGroup.getAttribute('y') };
   set y(newValue) {+this.boardGroup.setAttribute('y', newValue) };
 }
+
+
+
+
+
+
+// var bbox = elem.getBBox(),
+//   middleX = bbox.x + (bbox.width / 2),
+//   middleY = bbox.y + (bbox.height / 2);
+
+// generate a conversion function
+
+// use it to calculate the absolute center of the element
+
+// var dot = svg.append('circle')
+//   .attr('cx', absoluteCenter.x)
+//   .attr('cy', absoluteCenter.y)
+//   .attr('r', 5);
 
 const sliderConfig = [
   {
