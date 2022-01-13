@@ -25,7 +25,7 @@ export class Paddle {
     this.board = document.querySelector('#boardBackground')
     this.originY = (this.config.boardHeight / 2) - (this.config.height / 2) //((this.height - this.y1) - this.y) + (this.strokeWidth * 2.5)
     this.originX = this.config.side === 'left' ? 0 + this.config.width : this.config.boardWidth - (this.config.width * 2);
-    this.position$ = new BehaviorSubject(this.rect.getBoundingClientRect());
+    // this.position$ = new Subject();
 
     this.transform;
     this.translate
@@ -34,15 +34,23 @@ export class Paddle {
 
     this.rect.setAttribute('y', this.originY)
     this.paddleTransforms = this.rect.transform.baseVal;
+    // this.position$.next(this.rect.getBoundingClientRect())
 
     if (this.paddleTransforms.length === 0) {
       this.paddleTranslate = this.parentSvg.createSVGTransform();
       this.paddleTranslate.setTranslate(0, 0);
       this.paddleTransforms.insertItemBefore(this.paddleTranslate, 0);
     }
-    this.input$.pipe(tap(this.move)).subscribe()
     this.boardGroup.appendChild(this.rect)
+
+    // this.move(this.originY)
+
+    this.position$ = new BehaviorSubject(this.rect.getBoundingClientRect()).pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.rect.getBoundingClientRect())
+    this.input$.pipe(tap(this.move.bind(this))).subscribe()
+
     this._y;
+
+
   }
 
   updatePosition(y = this.originY, x = this.originX) {
@@ -61,14 +69,17 @@ export class Paddle {
         bottom: (-changedY + (this.config.boardHeight / 2)) + this.centroid.y,
       }
     }
-    return y > 0 ? changedY : -changedY
+    return { x: x, y: y > 0 ? changedY : -changedY }
   }
 
   move(yVal) {
+    const perc = this.updatePosition(yVal)
+
+    console.log('perc', perc)
     this.transform = this.paddleTransforms.getItem(0);
-    this.transform.setTranslate(this.originX, this.updatePosition(yVal))
-   console.log('this.hitbox', this.hitbox)
+    this.transform.setTranslate(perc.x, perc.y)
     this.position$.next(this.hitbox)
+    this.position$.next(this.rect.getBoundingClientRect())
   }
 
   endMove(evt) { this.selected = null }
@@ -79,6 +90,7 @@ export class Paddle {
       y: (y - this.CTM.f) / this.CTM.d
     };
   }
+
   getMousePosition(evt) {
     if (evt.touches) { evt = evt.targetTouches[0]; }
     return {
@@ -87,13 +99,13 @@ export class Paddle {
     };
   }
 
- 
+
   set position(val) {
-    this.position$.next(val)
+    this.position$.next(this.hitbox)
   }
   get hitbox() {
-    return this.root.getBoundingClientRect()
-    this.position$.next(val)
+    // this.position$.next(this.rect.getBoundingClientRect())
+    return this.rect.getBoundingClientRect()
   }
 
   get centroid() { return { x: this.width / 2, y: this.height / 2 } }

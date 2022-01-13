@@ -52,38 +52,38 @@ export class Game {
 
 
   detectCollision({ paddleLeft, paddleRight, ball }) {
-    // const paddleLeft = paddleLeft.getBoundingClientRect()
-    // const paddleRight = paddleRight.getBoundingClientRect()
-    // const ball = ball.getBoundingClientRect()
-    console.log('ball, paddleLeft.getBoundingClientRect(), paddleRight.getBoundingClientRect()')
-    console.log(ball, paddleLeft.getBoundingClientRect(), paddleRight.getBoundingClientRect())
-
-    const paddleLeftBox = paddleLeft.getBoundingClientRect()
-    const paddleRightBox = paddleRight.getBoundingClientRect()
+    /*
+    NOTE: MUST GET PADDLE BOUNDING RECTS HERE UNTIL THEY ARE PUSHING THE VALUE
+    */
+    // console.log(paddleLeft());
+    
+    const paddleLeftBox = paddleLeft//.getBoundingClientRect()
+    const paddleRightBox = paddleRight//.getBoundingClientRect()
     // console.log('yt');
     const hitBoundsLeft = ball.left <= paddleLeftBox.right;
     const hitBoundsRight = ball.right >= paddleRightBox.left
-
+console.log('paddleRightBox.left', paddleRightBox.left)
+console.log('ball.right', ball.right)
     // console.log('hitBoundsRight', hitBoundsRight)
     // console.log('paddleRightBox', paddleRightBox)
 
     const hitPaddleLeft = hitBoundsLeft && (ball.bottom >= paddleLeftBox.top && ball.top <= paddleLeftBox.bottom);
     const hitPaddleRight = hitBoundsRight && (ball.bottom >= paddleRightBox.top && ball.top <= paddleRightBox.bottom);
 
-    console.log('hitPaddleLeft hitPaddleRight', hitPaddleLeft, hitPaddleRight)
+    // console.log('hitPaddleLeft hitPaddleRight', hitPaddleLeft, hitPaddleRight)
     // const hitWallTop = ball.top > this.x
     // const hitWallBottom = hitBoundsRight && (ball.bottom >= paddleRight.top && ball.top <= paddleRight.bottom);
 
     if (hitPaddleLeft) {
       this.ball.directionX = 'right'
-      // if (ball.y - paddleLeft.y > 0) {
+      if (ball.y - paddleLeft.y > 0) {
       this.ball.directionY = 1;
       console.log('HIT PADDLE LEFT', this.ball)
 
-      // } else {
+      } else {
       this.ball.directionY = -1
 
-      // }
+      }
     } else if (hitPaddleRight) {
       console.log('HIT PADDLE RIGHT', )
       this.ball.directionX = 'left'
@@ -92,7 +92,7 @@ export class Game {
       this.outOfBounds = !this.outOfBounds
     }
   }
-  
+
   animate() {
     this.ballTranslate.setTranslate(this.changeX, this.changeY);
     this.position$.next(this.hitbox)
@@ -112,8 +112,8 @@ export class Game {
       takeWhile(() => !this.outOfBounds),
       tap(x => console.log('x', x)),
       map(({ paddleLeft, paddleRight, ball }) => {
-        console.log('{ paddleLeft, paddleRight, ball }', paddleLeft, paddleRight, ball )
-        return { paddleLeft:this.conver , paddleRight:this.conver , ball:this.conver  }
+        console.info('{ paddleLeft, paddleRight, ball }', paddleLeft, paddleRight, ball)
+        return { paddleLeft, paddleRight, ball }
       }),
     );
 
