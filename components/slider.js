@@ -1,4 +1,4 @@
-const { iif, Observable, BehaviorSubject, AsyncSubject, Subject, interval, of, fromEvent, merge, empty, delay, from } = rxjs;
+const { iif, Observable, BehaviorSubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
 const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
 
@@ -13,9 +13,9 @@ export class ActionRelayer {
   constructor(data = [[]] || new Map() || {}) {
     this._data = new Map(
       [...(Array.isArray(data) || data instanceof Map ? [...data] : Object.entries(data))]
-        .map(([k, v], i) => {
-          return ['x', 'y', 'width', 'w', 'height', 'h', 'strokeWidth', 'id'].includes(k) ? [k, v] : [k, v];
-        })
+      .map(([k, v], i) => {
+        return ['x', 'y', 'width', 'w', 'height', 'h', 'strokeWidth', 'id'].includes(k) ? [k, v] : [k, v];
+      })
     );
   };
   get data() { return this._data; };
@@ -179,8 +179,6 @@ export class SliderGroup {
     this.setAttr('background', 'rx', '22px');
     this.background.classList.add('slider-bg');
 
-
-
     this.setAttr('sliderAdjuster', 'x', this.width / 4);
     this.setAttr('sliderAdjuster', 'y', this.height + 5);
     this.setAttr('sliderAdjuster', 'width', this.width / 2);
@@ -219,7 +217,6 @@ export class SliderGroup {
 
     this.root.addEventListener('touchmove', this.repositionX.bind(this));
 
-
     this.root.addEventListener('mousedown', this.startDrag.bind(this));
     this.root.addEventListener('mousemove', this.drag.bind(this));
     this.root.addEventListener('mouseup', this.endDrag.bind(this));
@@ -228,30 +225,31 @@ export class SliderGroup {
     this.root.addEventListener('touchend', this.endDrag.bind(this));
   }
 
+  // COLLIDABLE
   get isInBounds() {
     return (
       this.changeY >= (this.config.y - this.config.y) + this.handleRadius - this.strokeWidth &&
-      this.changeY <= (this.config.height - this.handleRadius) + this.strokeWidth // + (this.handleRadius * 3)
+      this.changeY <= (this.config.height - this.handleRadius) + this.strokeWidth
     );
   }
 
+  // MOVE TO MOVABLE
   set value(val) { this._value = val; }
   get value() {
     const origin = this.config.height / 2;
     let val;
-    if (this.changeY < origin) {
+    if (this.changeY < origin)
       val = Math.round((((this.changeY - origin)) / (this.config.height - (origin + this.handleRadius))) * 100);
-    } else if (this.changeY > origin) {
+    else if (this.changeY > origin)
       val = Math.round(((this.changeY - origin) / (this.height - (origin + this.handleRadius))) * 100);
-    } else val = 0;
+    else val = 0;
+
     val = val > 100 ? 100 : val;
     this.value$.next(val);
     return val;
   }
 
-  get children() {
-    return this._children;
-  };
+  get children() { return this._children }
   set children(newValue) { this._children = newValue; };
   get trackRange() { return (this.y2 - this.y1) || 0; }
   get center() {
@@ -260,51 +258,17 @@ export class SliderGroup {
       y: this.y + (this.height / 2),
     };
   }
-  get y1() { return (parseInt(this.track !== undefined ? +this.track.getAttribute('y1') : this.config.y + this.handleRadius)); }
 
-  get y2() { return (parseInt(this.track !== undefined ? +this.track.getAttribute('y2') : this.config.height - this.handleRadius)); }
-  // get y2() { return (parseInt(this.track !== undefined ? +this.track.getAttribute('y2') : this.config.height)) }
-  // set y2(newValue) {
-  //   // this.track.setAttribute('y2', newValue) // - this.strokeWidth)
-  //   this.setAttr('track', 'y2', newValue - this.handleRadius - this.strokeWidth)
-  // }
-  // get cx() { return parseInt(this.handle.getAttribute('cx')) } // - this.strokeWidth || 0 }
-  // set cx(newValue) {
-  //   this.handleGroup.setAttribute('cx', newValue) - this.strokeWidth
-  //   this.handle.setAttribute('cx', newValue) - this.strokeWidth
-  // }
-  // get r() { return parseInt(this.handle.getAttribute('r')) } //+ this.strokeWidth || 0 }
-  // set r(newValue) {
-  //   this.handle.setAttribute('r', newValue)
-  // }
-  // get x() { return parseInt(this.root.getAttribute('x')) || 0 }
-  // get x() { return this.config.x }
-  // set x(newValue) {
-  //   this.root.setAttribute('x', newValue)
-  //   this.background.setAttribute('x', newValue)
-  // }
-  // get x() { return parseInt(this.root.getAttribute('x')) || 0 }
-  // set x(newValue) {
-  //   this.root.setAttribute('x', newValue)
-  //   this.background.setAttribute('x', newValue)
-  // }
-  // get y() { return parseInt(this.root.getAttribute('y')) || 0 }
-  // set y(newValue) {
-  //   this.root.setAttribute('y', newValue)
-  //   this.background.setAttribute('y', newValue)
-  // }
-  get width() { return (parseInt(this.background !== undefined ? this.background.getAttribute('width') : this.config.width)); }
+  get y1() { return this.track.y1.baseVal.value || +this.track.getAttribute('y1') || this.config.y }
+  get y2() { return this.track.y2.baseVal.value || +this.track.getAttribute('y2') || this.config.height - this.handleRadius; }
+  get width2() { return (parseInt(this.background !== undefined ? this.background.getAttribute('width') : this.config.width)); }
+  get width() { return this.background.width.baseVal.value }
   set width(newValue) {
     this.root.setAttribute('width', newValue);
-    this.background.setAttribute('width', newValue);
+    this.background.setAttribute('width', newValue)
   }
   get height() { return (parseInt(this.background !== undefined ? +this.background.getAttribute('height') : this.config.height)); }
   set height(newValue) {
-    this.root.setAttribute('height', newValue);
-    this.background.setAttribute('height', newValue);
-  }
-  get extendedHeight() { return (parseInt(this.background !== undefined ? +this.background.getAttribute('height') : this.config.height) + this.adjusterHeight); }
-  set extendedHeight(newValue) {
     this.root.setAttribute('height', newValue);
     this.background.setAttribute('height', newValue);
   }
@@ -313,5 +277,5 @@ export class SliderGroup {
 
 {
   SliderGroup,
-    ActionRelayer;
+  ActionRelayer;
 }

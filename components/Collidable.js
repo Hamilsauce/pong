@@ -1,13 +1,43 @@
-import { Movable } from './Movable.js';
+import { Spatial } from './Spatial.js';
 
-export class Collidable extends Movable {
-  constructor(element) {
-    this.root;
+export class Collidable extends Spatial {
+  constructor(parentSVG, type, attrs, isContainer = false) {
+    super(parentSVG, type, attrs);
+
+    this.isContainer = isContainer;
   };
 
-  getAttr(attr) {
-    return this
+  collideOn() {}
+ 
+  // collideOn(targetBox) {
+  //   if (this.isContainer) {
+  //     return !(
+  //       r2.bottom < r1.top ||
+  //       r2.right < r1.left ||
+  //       r2.top > r1.bottom ||
+  //       r2.left > r1.right
+  //     );
+  //   } else {
+  //     return !(
+  //       targetBox.top > this.hitbox.bottom ||
+  //       targetBox.right < this.hitbox.left ||
+  //       targetBox.bottom < this.hitbox.top ||
+  //       targetBox.left > this.hitbox.right
+  //     );
+
+  //   }
+  // }
+
+
+
+  getBoundingClientRect() { return this.root.getBoundingClientRect() }
+
+  get hitbox() {
+    return {
+      top: this.getBoundingClientRect().top,
+      right: this.getBoundingClientRect().right,
+      bottom: this.getBoundingClientRect().bottom,
+      left: this.getBoundingClientRect().left,
+    }
   }
-  get prop() { return this._prop };
-  set prop(newValue) { this._prop = newValue };
 }

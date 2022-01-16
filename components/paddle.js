@@ -4,14 +4,13 @@ const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, star
 export class Paddle {
   constructor(parentSvg, boardGroup, id, config = { input$: null, height: 100, boardHeight: 400, boardHeight: 384 }) {
     this.parentSvg = parentSvg;
-    this.CTM = this.parentSvg.getScreenCTM();
-    this.config = config;
     this.boardGroup = boardGroup
-    this.input$ = this.config.input$;
-    this.strokeWidth = config.strokeWidth || 4;
+
+    this.config = config;
+    this.CTM = this.parentSvg.getScreenCTM();
     this.root = document.createElementNS(SVG_NS, 'g');
     this.root.classList.add(`${id}Group`)
-
+    this.strokeWidth = config.strokeWidth || 4;
     this.rect = document.createElementNS(SVG_NS, 'rect');
     this.rect.classList.add('paddle')
     this.rect.setAttribute('height', this.config.height)
@@ -21,20 +20,16 @@ export class Paddle {
     this.rect.setAttribute('filter', 'drop-shadow(0 0 3px  #FFFFFF90)')
     this.rect.id = id
     this.fill = '#18181899'
-
-    this.board = document.querySelector('#boardBackground')
     this.originY = (this.config.boardHeight / 2) - (this.config.height / 2) //((this.height - this.y1) - this.y) + (this.strokeWidth * 2.5)
     this.originX = this.config.side === 'left' ? 0 + this.config.width : this.config.boardWidth - (this.config.width * 2);
-    // this.position$ = new Subject();
+    this.input$ = this.config.input$;
 
     this.transform;
     this.translate
     this.coord;
-    // this.hitbox = this.re
 
     this.rect.setAttribute('y', this.originY)
     this.paddleTransforms = this.rect.transform.baseVal;
-    // this.position$.next(this.rect.getBoundingClientRect())
 
     if (this.paddleTransforms.length === 0) {
       this.paddleTranslate = this.parentSvg.createSVGTransform();
@@ -42,40 +37,37 @@ export class Paddle {
       this.paddleTransforms.insertItemBefore(this.paddleTranslate, 0);
     }
     this.boardGroup.appendChild(this.rect)
-
-    // this.move(this.originY)
-
-    this.position$ = new BehaviorSubject(this.rect.getBoundingClientRect()).pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.rect.getBoundingClientRect())
+    this.position$ = new BehaviorSubject(this.rect.getBoundingClientRect())//.pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.rect.getBoundingClientRect())
     this.input$.pipe(tap(this.move.bind(this))).subscribe()
 
     this._y;
-
+    // console.log('YYYYYY', this.y)
+    // console.log('this.rect.y.baseVal.value', 
+    // console.log('this.rect.y.baseVal.value', this.rect.y.baseVal.value)
 
   }
 
   updatePosition(y = this.originY, x = this.originX) {
     /* NOTE: Returns the center Y of the paddle in px*/
     const changedY = (Math.abs(y) * this.originY) / 100; //- (this.config.height / 2)
-    if (y > 0) {
-      this.position = {
-        x: x,
-        top: ((this.config.boardHeight / 2) + changedY) - this.centroid.y,
-        bottom: ((this.config.boardHeight / 2) + changedY) + this.centroid.y,
-      }
-    } else {
-      this.position = {
-        x: x,
-        top: (-changedY + (this.config.boardHeight / 2)) - this.centroid.y,
-        bottom: (-changedY + (this.config.boardHeight / 2)) + this.centroid.y,
-      }
-    }
+    // if (y > 0) {
+    //   this.position = {
+    //     x: x,
+    //     top: ((this.config.boardHeight / 2) + changedY) - this.centroid.y,
+    //     bottom: ((this.config.boardHeight / 2) + changedY) + this.centroid.y,
+    //   }
+    // } else {
+    //   this.position = {
+    //     x: x,
+    //     top: (-changedY + (this.config.boardHeight / 2)) - this.centroid.y,
+    //     bottom: (-changedY + (this.config.boardHeight / 2)) + this.centroid.y,
+    //   }
+    // }
     return { x: x, y: y > 0 ? changedY : -changedY }
   }
 
   move(yVal) {
     const perc = this.updatePosition(yVal)
-
-    console.log('perc', perc)
     this.transform = this.paddleTransforms.getItem(0);
     this.transform.setTranslate(perc.x, perc.y)
     this.position$.next(this.hitbox)
@@ -83,13 +75,6 @@ export class Paddle {
   }
 
   endMove(evt) { this.selected = null }
-
-  getCoordsCTM(x, y) {
-    return {
-      x: (x - this.CTM.e) / this.CTM.a,
-      y: (y - this.CTM.f) / this.CTM.d
-    };
-  }
 
   getMousePosition(evt) {
     if (evt.touches) { evt = evt.targetTouches[0]; }
@@ -99,39 +84,46 @@ export class Paddle {
     };
   }
 
+  getCoordsCTM(x, y) {
+    return {
+      x: (x - this.CTM.e) / this.CTM.a,
+      y: (y - this.CTM.f) / this.CTM.d
+    };
+  }
 
   set position(val) {
     this.position$.next(this.hitbox)
   }
-  get hitbox() {
-    // this.position$.next(this.rect.getBoundingClientRect())
-    return this.rect.getBoundingClientRect()
-  }
+
+  get x() { return this.rect.x.baseVal.value ||this.config.x}
+  set x(val) { this.rect.x.baseVal.value = value }
+  get y() { return this.rect.y.baseVal.value ||this.config.y}
+  set y(val) { this.rect.y.baseVal.value = value }
+
+  get cx() { return this.rect.cx.baseVal.value ||this.config.cx}
+  set cx(val) { this.rect.cx.baseVal.value = value }
+  get cy() { return this.rect.cy.baseVal.value ||this.config.cy}
+  set cy(val) { this.rect.cy.baseVal.value = value }
+
+  get height() {return this.rect.height.baseVal.value ||this.config.height}
+  set height(val) { this.rect.height.baseVal.value = value }
+  get width() {return  this.rect.width.baseVal.value ||this.config.width}
+  set height(val) { this.rect.height.baseVal.value = value }
+ 
+  get x1() {return this.rect.x1.baseVal.value ||this.config.x1}
+  set x2(val) { this.rect.x2.baseVal.value = value }
+  get y1() {return  this.rect.y1.baseVal.value ||this.config.x2}
+  set y2(val) { this.rect.y2.baseVal.value = value }
 
   get centroid() { return { x: this.width / 2, y: this.height / 2 } }
-
   get fill() { return this.rect.getAttribute('fill') }
   set fill(val) { this.rect.setAttribute('fill', val) }
 
-  get x() {
-    return +this.rect.getAttribute('x')
-  }
-  set y(newValue) {
-    this._y = this.updatePosition(newValue)
-  }
-  get y() {
-    return this.updatePosition;
-  }
-  get y() {
-    return this.updatePosition
-  }
-  get width() {
-    return this.config.width
-  }
-  get height() {
-    return this.config.height
-  }
-
+  // get hitbox() { return this.rect.getBoundingClientRect() }
+  // get x() {return +this.rect.getAttribute('x')}
+  // set y(newValue) {this._y = this.updatePosition(newValue)}
+  // get y() {return this.updatePosition;}
+  // get y() {return this.updatePosition}
 }
 
 {

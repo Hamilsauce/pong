@@ -246,7 +246,7 @@ svgpong = function() {
       ball.cy -= ball.bottom - box.height;
       ball.dy *= -1;
     }
-    field.unsuspendRedraw(suspense);
+    // field.unsuspendRedraw(suspense);
     field.unpauseAnimations(suspense);
     requestAnimationFrame(animate);
   }
