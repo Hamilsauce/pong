@@ -1,14 +1,12 @@
 import { Spatial } from './Spatial.js';
 
 export class Collidable extends Spatial {
-  constructor(parentSVG, type, attrs, isContainer = false) {
-    super(parentSVG, type, attrs);
-
+  constructor({ parentSVG, type, attrs, isContainer = false }) {
+    super({ parentSVG, type, attrs });
     this.isContainer = isContainer;
   };
 
   collideOn() {}
- 
   // collideOn(targetBox) {
   //   if (this.isContainer) {
   //     return !(
@@ -38,6 +36,8 @@ export class Collidable extends Spatial {
       right: this.getBoundingClientRect().right,
       bottom: this.getBoundingClientRect().bottom,
       left: this.getBoundingClientRect().left,
+      centerY: this.getBoundingClientRect().top + (this.getBoundingClientRect().bottom - this.getBoundingClientRect().top) / 2,
+      centerX: this.getBoundingClientRect().left + (this.getBoundingClientRect().right - this.getBoundingClientRect().left) / 2,
     }
   }
 }

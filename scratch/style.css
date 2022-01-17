@@ -78,7 +78,8 @@ body {
   /* transition: 0.1s; */
 }
 .paddle {
-  fill: #18181890;
+  fill: #383838D6;
+filter: contrast(130%) drop-shadow(0 0 2px #ffffff);
 }
 
 .text-node {
@@ -89,4 +90,10 @@ body {
   display: inline-block;
   outline: none;
   filter: invert(80%);
+}
+
+.ball {
+  fill: #00000075;
+  stroke: #ffffff90;
+filter: contrast(130%) drop-shadow(0 0 2px #000000);
 }
