@@ -1,7 +1,7 @@
-import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
-const { log, help, DOM, date, array, utils, text } = ham;
-const { combineLatest, iif, ReplaySubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { mergeAll, sampleTime, throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
+// import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
+// const { log, help, DOM, array, utils, text } = ham;
+const { combineLatest, iif,Subject, interval, of , fromEvent, merge, from } = rxjs;
+const { mergeAll, sampleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter} = rxjs.operators;
 
 import { SliderGroup, ActionRelayer } from '../components/slider.js';
 import { Paddle } from './components/paddle.js';
@@ -37,7 +37,6 @@ export class Game {
       }
     })
     this.boardGroup.appendChild(this.ball.root);
-    console.log('this.ball', this.ball);
 
     this.rootTransforms = this.root.transform.baseVal;
     if (this.rootTransforms.length === 0) {
@@ -48,6 +47,22 @@ export class Game {
     this.init();
   };
 
+  init() {
+    this.scene$ = combineLatest(
+      this.paddleLeft.position$,
+      this.paddleRight.position$,
+      this.ball.position$,
+      (paddleLeft, paddleRight, ball) => ({ paddleLeft, paddleRight, ball })
+    ).pipe(
+      sampleTime(40),
+      takeWhile(() => !this.outOfBounds),
+      map(({ paddleLeft, paddleRight, ball }) => {
+        return { paddleLeft, paddleRight, ball }
+      }),
+    );
+
+    this.scene$.subscribe(this.detectCollision.bind(this))
+  }
 
   convertCoords(x, y, elem) {
     const offset = this.root.getBoundingClientRect();
@@ -77,8 +92,6 @@ export class Game {
     /*
     NOTE: MUST GET PADDLE BOUNDING RECTS HERE UNTIL THEY ARE PUSHING THE VALUE
     */
-    // console.log('console.log();', ball)
-
     if (
       ball.left <= paddleLeft.right &&
       (ball.bottom >= paddleLeft.top && ball.top <= paddleLeft.bottom)
@@ -130,22 +143,7 @@ export class Game {
     requestAnimationFrame(this.animate.bind(this))
   }
 
-  init() {
-    this.scene$ = combineLatest(
-      this.paddleLeft.position$,
-      this.paddleRight.position$,
-      this.ball.position$,
-      (paddleLeft, paddleRight, ball) => ({ paddleLeft, paddleRight, ball })
-    ).pipe(
-      sampleTime(40),
-      takeWhile(() => !this.outOfBounds),
-      map(({ paddleLeft, paddleRight, ball }) => {
-        return { paddleLeft, paddleRight, ball }
-      }),
-    );
 
-    this.scene$.subscribe(this.detectCollision.bind(this))
-  }
 
   convertCoords(x, y, elem) {
     const offset = this.root.getBoundingClientRect();

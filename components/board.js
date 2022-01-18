@@ -1,8 +1,4 @@
 import { Collidable } from './Collidable.js'
-// import { Spatial } from './Spatial.js'
-
-const { iif, Observable, BehaviorSubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
 const boardattrs = {
   id: null,
@@ -14,7 +10,6 @@ const boardattrs = {
   fill: null,
   stroke: null,
 }
-console.log('b4 bosrs');
 
 export class Board extends Collidable {
   constructor(parentSVG, attrs) {

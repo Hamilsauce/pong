@@ -1,7 +1,4 @@
 import { Movable } from './Movable.js';
-const { iif, Observable, BehaviorSubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
-// console.log('in ball top');
 
 export class Ball extends Movable {
   constructor({ parentSVG, boardGroup, paddles$, attrs }) { //= { fill: 'red', name: 'ball', input$: null, boardHeight: 400 } }) {
@@ -16,8 +13,6 @@ export class Ball extends Movable {
     this.directionY = 0;
 
     this.anim = requestAnimationFrame(this.animate.bind(this))
-    // return this.root
-    // return this.position$;
   }
 
   animate() {

@@ -1,9 +1,5 @@
 import { Collidable } from './Collidable.js';
-// const { iif, BehaviorSubject, ReplaySubject, AsyncSubject, Subject, interval, of , fromEvent, merge, empty, delay, from } = rxjs;
-// const { throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
-const {
-  BehaviorSubject
-} = rxjs; 
+const { BehaviorSubject } = rxjs;
 
 
 export class Movable extends Collidable {
@@ -17,9 +13,8 @@ export class Movable extends Collidable {
     this.changeY = 0;
     this.changeX = 0;
 
-    this.position$ = new BehaviorSubject(this.root.getBoundingClientRect()) 
-    //.pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.root.getBoundingClientRect())
-  } 
+    this.position$ = new BehaviorSubject(this.root.getBoundingClientRect())
+  }
 
   translate({ x, y, cx, cy, x1, x2, y1, y2 }) { return { x: null, y: null } }
 

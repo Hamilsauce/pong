@@ -25,6 +25,8 @@ export class ActionRelayer {
 
 // TODO Add Slider RepositionX
 
+// TODO Hokl up to class tree
+
 export class SliderGroup {
   constructor(parentSvg, element, config = new SliderConfig()) {
     this.selected = null;
