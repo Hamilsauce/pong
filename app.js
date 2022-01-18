@@ -86,10 +86,6 @@ export class Game {
       const rawPOI = ball.top + (ball.center)
       const POIR = -((paddleLeft.top - paddleLeft.bottom) - (rawPOI - paddleLeft.bottom)) - 50
       this.ball.directionX = 'right'
-      // this.ball.directionY = -(POIR / 100) + 1
-      // if (this.ball.directionY < 0) { this.ball.directionY = -(this.ball.directionY) }
-      // else if (this.ball.directionY > 0) { this.ball.directionY = -(this.ball.directionY) }
-      // else { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
     }
     else if (
@@ -100,7 +96,6 @@ export class Game {
       const POIR = -((paddleRight.top - paddleRight.bottom) - (rawPOI - paddleRight.bottom)) - 50
       this.ball.directionX = 'left'
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-      // else { this.ball.directionY = this.ball.directionY }
     }
 
     if (ball.top < this.board.hitbox.top || ball.bottom >= this.board.hitbox.bottom) {
@@ -109,15 +104,6 @@ export class Game {
     else if (ball.bottom > this.board.hitbox.bottom) {
       this.ball.directionY = this.ball.directionY
     }
-
-    const paddleLeftBox = paddleLeft //.getBoundingClientRect()
-    const paddleRightBox = paddleRight //.getBoundingClientRect()
-
-    const hitBoundsLeft = ball.left <= paddleLeftBox.right;
-    const hitBoundsRight = ball.right >= paddleRightBox.left
-
-    const hitPaddleLeft = hitBoundsLeft && (ball.bottom >= paddleLeftBox.top && ball.top <= paddleLeftBox.bottom);
-    const hitPaddleRight = hitBoundsRight && (ball.bottom >= paddleRightBox.top && ball.top <= paddleRightBox.bottom);
   }
 
   collideOn() {
@@ -159,7 +145,6 @@ export class Game {
     );
 
     this.scene$.subscribe(this.detectCollision.bind(this))
-
   }
 
   convertCoords(x, y, elem) {
@@ -187,24 +172,6 @@ export class Game {
   set y(newValue) {+this.boardGroup.setAttribute('y', newValue) };
 }
 
-
-
-
-
-
-// const bbox = elem.getBBox(),
-//   middleX = bbox.x + (bbox.width / 2),
-//   middleY = bbox.y + (bbox.height / 2);
-
-// generate a conversion function
-
-// use it to calculate the absolute center of the element
-
-// const dot = svg.append('circle')
-//   .attr('cx', absoluteCenter.x)
-//   .attr('cy', absoluteCenter.y)
-//   .attr('r', 5);
-
 const sliderConfig = [
   {
     x: 50,
@@ -228,8 +195,4 @@ const sliderConfig = [
   },
 ];
 
-// const relayer = new ActionRelayer(sliderConfig)
-// console.log('relayer', [...relayer])
-// const sliderComp = new SliderGroup('#game', undefined, config)
-// const game = new Game('#game', {sliderConfig});
 const game = new Game('#game', sliderConfig);
