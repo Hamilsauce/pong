@@ -4,9 +4,9 @@ const { combineLatest, iif, ReplaySubject, AsyncSubject, Subject, interval, of ,
 const { mergeAll, sampleTime, throttleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter, mapTo } = rxjs.operators;
 
 import { SliderGroup, ActionRelayer } from '../components/slider.js';
-import { Paddle } from '../components/paddle.js';
-import { Ball } from '../components/ball.js';
-import { Board } from '../components/board.js';
+import { Paddle } from './components/paddle.js';
+import { Ball } from './components/ball.js';
+import { Board } from './components/board.js';
 
 
 export class Game {
@@ -15,7 +15,7 @@ export class Game {
     this.scene$;
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
-    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: this.root.width.baseVal.value, height: 400, fill: "url(#boardGradient)" })
+    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 400, fill: "url(#boardGradient)" })
     this.boardGroup.appendChild(this.board.root)
     this._x;
     this._y;
@@ -37,7 +37,14 @@ export class Game {
       }
     })
     this.boardGroup.appendChild(this.ball.root);
-console.log('this.ball',this.ball);
+    console.log('this.ball', this.ball);
+
+    this.rootTransforms = this.root.transform.baseVal;
+    if (this.rootTransforms.length === 0) {
+      this.rootTranslate = this.root.createSVGTransform();
+      this.rootTranslate.setTranslate(0, 0);
+      this.rootTransforms.insertItemBefore(this.rootTranslate, 0);
+    }
     this.init();
   };
 
@@ -70,7 +77,7 @@ console.log('this.ball',this.ball);
     /*
     NOTE: MUST GET PADDLE BOUNDING RECTS HERE UNTIL THEY ARE PUSHING THE VALUE
     */
-// console.log('console.log();', ball)
+    // console.log('console.log();', ball)
 
     if (
       ball.left <= paddleLeft.right &&

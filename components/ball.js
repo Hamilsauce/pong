@@ -16,6 +16,8 @@ export class Ball extends Movable {
     this.directionY = 0;
 
     this.anim = requestAnimationFrame(this.animate.bind(this))
+    // return this.root
+    // return this.position$;
   }
 
   animate() {

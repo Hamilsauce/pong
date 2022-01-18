@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" >
-  <g id="surface" class="draggable" transorm="traslate(0, 0)" x="0" y="0">
-    <rect x="0" y="0" width="800" height="600" fill="url(#00ff00)" />
-    <circle cx="400" cy="300" r="250" stroke-width="20" stroke="#f00" fill="#00ff00" />
-  </g>
-</svg>
