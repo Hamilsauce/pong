@@ -1,5 +1,3 @@
-
-
 const ShapeTypeMap = new Map()
 
 export class Spatial {
@@ -40,7 +38,7 @@ export class Spatial {
       y: this.y + this.radiusY,
     }
   }
-
+ 
   get x() { try { return this.root.x.baseVal.value } catch (e) { return null } }
   set x(val) { this.root.x.baseVal.value = val }
   get y() { try { return this.root.y.baseVal.value } catch (e) { return null } }

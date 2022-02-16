@@ -11,6 +11,7 @@ const boardattrs = {
   stroke: null,
 }
 
+
 export class Board extends Collidable {
   constructor(parentSVG, attrs) {
     super({ parentSVG, type: 'rect', attrs, isContainer: true })

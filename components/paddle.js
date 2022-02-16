@@ -40,6 +40,7 @@ export class Paddle extends Collidable {
     const changedY = (Math.abs(y) * this.originY) / 100; //- (this.attrs.height / 2)
     return { x: x, y: y > 0 ? changedY : -changedY }
   }
+  
   move(yVal) {
     const perc = this.updatePosition(yVal)
     this.transform = this.paddleTransforms.getItem(0)
