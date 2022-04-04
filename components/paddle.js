@@ -47,6 +47,7 @@ export class Paddle extends Collidable {
     this.transform.setTranslate(perc.x, perc.y)
     this.position$.next(this.hitbox)
   }
+  
   endMove(evt) { this.selected = null }
 
   getMousePosition(evt) {

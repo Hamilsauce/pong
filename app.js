@@ -1,27 +1,28 @@
-// import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
-// const { log, help, DOM, array, utils, text } = ham;
-const { combineLatest, iif,Subject, interval, of , fromEvent, merge, from } = rxjs;
-const { mergeAll, sampleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter} = rxjs.operators;
+const { combineLatest, iif, Subject, interval, of , fromEvent, merge, from } = rxjs;
+const { mergeAll, sampleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter } = rxjs.operators;
 
 import { SliderGroup, ActionRelayer } from '../components/slider.js';
 import { Paddle } from './components/paddle.js';
 import { Ball } from './components/ball.js';
 import { Board } from './components/board.js';
 
-
 export class Game {
   constructor(selector, { key1 = 'vfuck1', key2 = 'vfuck2' }) {
-    this.outOfBounds = false
+    this._x;
+    this._y;
     this.scene$;
+    this.outOfBounds = false
+
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
     this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 400, fill: "url(#boardGradient)" })
     this.boardGroup.appendChild(this.board.root)
-    this._x;
-    this._y;
+
     this.sliders = sliderConfig ? sliderConfig.reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {}) : null;
+
     this.paddleLeft = new Paddle(this.root, this.boardGroup, 'leftPaddle', { input$: this.sliders.left.value$, y: this.board.centroid.y, side: 'left', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, rx: 8 });
     this.paddleRight = new Paddle(this.root, this.boardGroup, 'rightPaddle', { input$: this.sliders.right.value$, y: this.board.centroid.y, side: 'right', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, rx: 8 });
+
     this.ball = new Ball({
       parentSVG: this.root,
       boardGroup: this.boardGroup,
@@ -36,6 +37,7 @@ export class Game {
         boardWidth: 384
       }
     })
+
     this.boardGroup.appendChild(this.ball.root);
 
     this.rootTransforms = this.root.transform.baseVal;
@@ -89,12 +91,9 @@ export class Game {
 
 
   detectCollision({ paddleLeft, paddleRight, ball }) {
-    /*
-    NOTE: MUST GET PADDLE BOUNDING RECTS HERE UNTIL THEY ARE PUSHING THE VALUE
-    */
     if (
-      ball.left <= paddleLeft.right &&
-      (ball.bottom >= paddleLeft.top && ball.top <= paddleLeft.bottom)
+      (ball.left <= paddleLeft.right &&
+        (ball.bottom >= paddleLeft.top && ball.top <= paddleLeft.bottom))
     ) {
       const rawPOI = ball.top + (ball.center)
       const POIR = -((paddleLeft.top - paddleLeft.bottom) - (rawPOI - paddleLeft.bottom)) - 50
@@ -111,11 +110,17 @@ export class Game {
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
     }
 
-    if (ball.top < this.board.hitbox.top || ball.bottom >= this.board.hitbox.bottom) {
-      this.ball.directionY = -(this.ball.directionY)
+    if (ball.left <= this.board.hitbox.left) {
+      this.ball.directionX = -(this.ball.directionX)
+    } else if (ball.right >= this.board.hitbox.right) {
+      this.ball.directionX = 'left'
+      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
     }
     else if (ball.bottom > this.board.hitbox.bottom) {
-      this.ball.directionY = this.ball.directionY
+      this.ball.directionY = -this.ball.directionY
+    }
+    else if (ball.top < this.board.hitbox.top) {
+      this.ball.directionY = -this.ball.directionY
     }
   }
 

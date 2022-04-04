@@ -5,6 +5,7 @@ const { BehaviorSubject } = rxjs;
 export class Movable extends Collidable {
   constructor({ parentSVG, type = 'rect', attrs = {}, isContainer = false, coordsInput$ }) {
     super({ parentSVG, type, attrs })
+    
     this._lastPosition = { x: 0, y: 0 }
     this.transform;
     this.translate

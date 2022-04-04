@@ -73,7 +73,9 @@ export class SliderGroup {
     this.init();
 
     this.sliderTransforms = this.root.transform.baseVal;
+    
     this.handleTransforms = this.handleGroup.transform.baseVal;
+    
     this.textNodeTransforms = this.textNode.transform.baseVal;
 
     if (this.handleTransforms.length === 0) {
@@ -124,6 +126,7 @@ export class SliderGroup {
     if (this.selected) {
       evt.preventDefault();
       evt.stopPropagation();
+
       this.coord = this.getMousePosition(evt);
       this.changeY = this.coord.y - this.offset.y;
 
@@ -135,7 +138,8 @@ export class SliderGroup {
         this.handleRotate.setRotate(this.value * 7.2, this.width / 2, 0);
         this.textNodeRotate.setRotate(-this.value * 7.2, this.width / 2, 0);
 
-        if (Math.abs(this.value) <= 0.9) this.handle.classList.add('at-origin');
+        if (Math.abs(this.value) <= 0.9)
+          this.handle.classList.add('at-origin');
         else this.handle.classList.remove('at-origin');
       }
     }
@@ -149,12 +153,14 @@ export class SliderGroup {
   createText() {
     const textNode = document.createElementNS(SVG_NS, "text");
     const text = document.createTextNode(this.value);
+    
     textNode.appendChild(text);
     return textNode;
   }
 
   setAttr(childKey = '', attr = '', value) {
     this.getElement(childKey).setAttribute(attr, value);
+    
     return this.getElement(childKey);
   }
 
@@ -165,6 +171,7 @@ export class SliderGroup {
   getMousePosition(evt) {
     const CTM = this.parentSvg.getScreenCTM();
     if (evt.touches) { evt = evt.targetTouches[0]; }
+    
     return {
       x: (evt.clientX - CTM.e) / CTM.a,
       y: (evt.clientY - CTM.f) / CTM.d
@@ -179,6 +186,7 @@ export class SliderGroup {
     this.setAttr('background', 'width', this.width);
     this.setAttr('background', 'height', this.height);
     this.setAttr('background', 'rx', '22px');
+    
     this.background.classList.add('slider-bg');
 
     this.setAttr('sliderAdjuster', 'x', this.width / 4);
@@ -188,12 +196,14 @@ export class SliderGroup {
     this.setAttr('sliderAdjuster', 'rx', '8px');
     this.setAttr('sliderAdjuster', 'fill', '#18181890');
     this.setAttr('sliderAdjuster', 'stroke', '#00000050');
+    
     this.background.classList.add('sliderAdjuster');
 
     this.setAttr('track', 'x1', this.width / 2);
     this.setAttr('track', 'x2', this.width / 2);
     this.setAttr('track', 'y1', this.handleRadius);
     this.setAttr('track', 'y2', this.height - this.handleRadius);
+    
     this.track.classList.add('slider-track');
 
     this.setAttr('handle', 'r', this.handleRadius);
@@ -201,10 +211,12 @@ export class SliderGroup {
     this.setAttr('handle', 'fill', 'url(#handleGradient)');
     this.setAttr('handle', 'stroke', '#00000050');
     this.setAttr('handle', 'stroke-width', '1px');
+    
     this.handle.classList.add('at-origin');
 
     this.setAttr('text', 'x', this.handleRadius);
     this.setAttr('text', 'y', this.handleRadius / 4);
+    
     this.textNode.classList.add('text-node');
     this.textNode.setAttributeNS(null, 'text-anchor', 'middle');
 
@@ -215,6 +227,7 @@ export class SliderGroup {
     this.root.appendChild(this.track);
     this.root.appendChild(this.handleGroup);
     this.root.appendChild(this.adjuster);
+    
     this.parentSvg.appendChild(this.root);
 
     this.root.addEventListener('touchmove', this.repositionX.bind(this));
@@ -235,11 +248,13 @@ export class SliderGroup {
     );
   }
 
-  // MOVE TO MOVABLE
+  // MOVE INTO MOVABLE CLASS
   set value(val) { this._value = val; }
+  
   get value() {
     const origin = this.config.height / 2;
     let val;
+    
     if (this.changeY < origin)
       val = Math.round((((this.changeY - origin)) / (this.config.height - (origin + this.handleRadius))) * 100);
     else if (this.changeY > origin)
@@ -252,8 +267,11 @@ export class SliderGroup {
   }
 
   get children() { return this._children }
+  
   set children(newValue) { this._children = newValue; };
+  
   get trackRange() { return (this.y2 - this.y1) || 0; }
+  
   get center() {
     return {
       x: this.x + (this.width / 2),
