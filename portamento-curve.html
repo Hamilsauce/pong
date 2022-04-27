@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portamento</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- <script src="main.js" type="module"></script> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Portamento</h1>
+        <h2>Frequency transition easing</h2>
+        <p>
+            Experiment to apply the Bezier Controller to WebAudio. This is a spin-off of <a href="https://potatodie.nl/diffuse-write-ups/move-eased-dot-along-a-curve/">Ease a dot along a curve</a>.
+            Doesn't work in Safari, unfortunately.
+        </p>
+        <p>
+            Drag a handle to adjust the curve. The sound will play when the drag ends. The frequency shifts from 220 to 660 Hz, following the hand-crafted Bezier curve.
+        </p>
+        <div id="bezier-controller-container"></div>
+        
+        <h3>Improvements</h3>
+        <ul>
+            <li>User input for begin frequency, end frequency and duration.</li>
+            <li>Show current frequency graphically (it's now in the console). E.g. on note bar.</li>
+            <li>Fix monitoring frequency for several notes played at the same time.</li>
+            <!-- <li>React or Vue might help here</li> -->
+            <!-- <li>Share code (gist)</li> -->
+        </ul>
+
+
+    </div>
+    <script src="main-dist.js"></script>
+	    <!-- Google Analytics -->
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-12336670-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+
+ 
+</body>
+</html>

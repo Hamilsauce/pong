@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>new pipe</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style type="text/css">
+    html {
+      min-height: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    div {
+      border: 1px solid gray;
+    }
+
+    body {
+      height: 100%;
+      font-size: 20px;
+    }
+
+    path {
+      stroke: #000;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      height: 100%;
+    }
+
+    .container>div {
+      flex: 1;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .item {
+      flex: 1;
+      padding: 8px;
+    }
+
+    .chart {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      vertical-align: top;
+      overflow: hidden;
+      "
+
+    }
+
+    .popper {
+      z-index: 1000 !important;
+      width: 100% !important;
+      height: 100% !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0;
+      background-color: #fff;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="item">Div One</div>
+    <div class="row">
+      <div class="item chart">
+        <button type="button" onClick="window.popOut()">
+          Pop Out
+        </button>
+        <svg preserveAspectRatio="xMinYMin meet" viewBox="0 0 1200 900">
+          <g class="vx-group vx-tree" transform="translate(30, 37)">
+            <g transform="matrix(1,0,0,1,0,0)">
+              <g class="vx-group" transform="translate(0, 0)">
+                <path class="vx-link-vertical link__node" d="M189.27272727272728,353.5C189.27272727272728,176.75,567.8181818181819,176.75,567.8181818181819,0" percent="20.5" stroke-width="1" stroke-opacity="0.2" fill="none"></path>
+                <path class="vx-link-vertical link__node" d="M567.8181818181819,353.5C567.8181818181819,176.75,567.8181818181819,176.75,567.8181818181819,0" percent="20.5" stroke-width="1" stroke-opacity="0.2" fill="none"></path>
+                <path class="vx-link-vertical link__node" d="M946.3636363636364,353.5C946.3636363636364,176.75,567.8181818181819,176.75,567.8181818181819,0" percent="20.5" stroke-width="1" stroke-opacity="0.2" fill="none"></path>
+                <path class="vx-link-vertical link__node" d="M189.27272727272728,353.5C189.27272727272728,530.25,94.63636363636364,530.25,94.63636363636364,707" percent="20.5" stroke-width="1" stroke-opacity="0.2" fill="none"></path>
+                <path class="vx-link-vertical link__node" d="M189.27272727272728,353.5C189.27272727272728,530.25,283.90909090909093,530.25,283.90909090909093,707" percent="20.5" stroke-width="1" stroke-opacity="0.2" fill="none"></path>
+              </g>
+              <g class="vx-group" transform="translate(0, 0)">
+                <g class="vx-group node__0" transform="translate(567.8181818181819, 0)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="node__inactive" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon undefined"></polygon>
+                    </svg>
+                    <g class="node__plan undefined node__inactive">
+                      <use xlink:href="#icon-Plan"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="48.63100051879883" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0em">Finance BCP</tspan>
+                        </text></svg><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="68.63100051879883" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Plan</tspan>
+                        </text></svg></g>
+                  </g>
+                </g>
+                <g class="vx-group node__1" transform="translate(189.27272727272728, 353.5)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon node__active"></polygon>
+                    </svg>
+                    <g class="node__service node__active">
+                      <use xlink:href="#icon-Service"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="48.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0em">Accounts Receivable</tspan>
+                        </text></svg>
+                      <svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="68.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Service</tspan>
+                        </text></svg>
+                    </g><svg class="zoomout__container" height="20" width="20" viewBox="15 55 30 20">
+                      <g>
+                        <circle class="node__shape-fill" cx="15" cy="10" r="10" stroke-width="2"></circle>
+                        <line class="node__shape-fill" x1="8.5" y1="10" x2="21" y2="10" stroke-width="2"></line>
+                      </g>
+                    </svg>
+                  </g>
+                </g>
+                <g class="vx-group node__2" transform="translate(567.8181818181819, 353.5)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="node__inactive" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon"></polygon>
+                    </svg>
+                    <g class="node__service node__inactive">
+                      <use xlink:href="#icon-Service"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="48.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0em">General Accounting</tspan>
+                        </text></svg>
+                      <svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="68.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Service</tspan>
+                        </text></svg>
+                    </g><svg class="zoomout__container" height="20" width="20" viewBox="15 55 30 20">
+                      <g>
+                        <circle class="node__shape-fill" cx="15" cy="10" r="10" stroke-width="2"></circle>
+                        <line class="node__shape-fill" x1="8.5" y1="10" x2="21" y2="10" stroke-width="2"></line>
+                        <line x1="16" y1="5" x2="16" y2="15" stroke-width="2"></line>
+                      </g>
+                    </svg>
+                  </g>
+                </g>
+                <g class="vx-group node__3" transform="translate(946.3636363636364, 353.5)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="node__inactive" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon"></polygon>
+                    </svg>
+                    <g class="node__service node__inactive">
+                      <use xlink:href="#icon-Service"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="48.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0em">Accounts Payable</tspan>
+                        </text></svg>
+                      <svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="68.92399978637695" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Service</tspan>
+                        </text></svg>
+                    </g><svg class="zoomout__container" height="20" width="20" viewBox="15 55 30 20">
+                      <g>
+                        <circle class="node__shape-fill" cx="15" cy="10" r="10" stroke-width="2"></circle>
+                        <line class="node__shape-fill" x1="8.5" y1="10" x2="21" y2="10" stroke-width="2"></line>
+                        <line x1="16" y1="5" x2="16" y2="15" stroke-width="2"></line>
+                      </g>
+                    </svg>
+                  </g>
+                </g>
+                <g class="vx-group node__4" transform="translate(94.63636363636364, 707)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="node__inactive" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon"></polygon>
+                    </svg>
+                    <g class="node__activity node__inactive">
+                      <use xlink:href="#icon-Activity"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="52.00199890136719" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="-1em">General Ledger Group</tspan>
+                          <tspan x="0" dy="1em">Accounting</tspan>
+                        </text></svg>
+                      <svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="72.00199890136719" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Activity</tspan>
+                        </text></svg>
+                    </g>0
+                  </g>
+                </g>
+                <g class="vx-group node__5" transform="translate(283.90909090909093, 707)" opacity="1">
+                  <g transform="matrix(1,0,0,1,0,0)" class="node__container"><svg class="node__inactive" x="0" y="0" style="overflow: visible;">
+                      <polygon points="25.98076211353316,-14.999999999999998 25.98076211353316,14.999999999999998 1.83697019872103e-15,30 -25.98076211353316,14.999999999999998 -25.980762113533157,-15.000000000000004 -5.510910596163089e-15,-30" class="node__hexagon"></polygon>
+                    </svg>
+                    <g class="node__activity node__inactive">
+                      <use xlink:href="#icon-Activity"></use>
+                    </g>
+                    <g><svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__name" width="150" y="52.00199890136719" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0em">Accounts Receivable</tspan>
+                        </text></svg>
+                      <svg x="0" y="0" style="overflow: visible;"><text class="label-down__item__type" width="150" y="72.00199890136719" x="0" text-anchor="middle" style="pointer-events: none;">
+                          <tspan x="0" dy="0.71em">Activity</tspan>
+                        </text></svg>
+                    </g>0
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="item">Column two</div>
+      <div class="item">Column Three</div>
+    </div>
+  </div>
+  <script src="viewboxdemo.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

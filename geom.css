@@ -1,0 +1,60 @@
+ *{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-width:100vw;min-height:100vh;
+}
+
+#app,
+.app {
+  width: 100%;
+  height: 100%;
+  min-width:100vw;min-height:100vh;
+} 
+
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  display: grid;
+  gap: 1rem;
+  place-content: center;
+}
+
+.shape {
+  width: min(20rem, 90vmin);
+  height: min(20rem, 90vmin);
+  position: relative;
+  background: whitesmoke;
+  border: 1px solid lightgrey;
+}
+.shape::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, deeppink, orange);
+  -webkit-clip-path: var(--clip);
+  clip-path: var(--clip);
+  transition: clip-path 200ms;
+}
+
+/* Controls */
+.controls__group > * {
+  display: block;
+  width: 100%;
+}

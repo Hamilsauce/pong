@@ -16,39 +16,28 @@
 <body>
   <div class="app">
     <div class="app-body">
-      <svg id="game" viewport="0 0"    x="0" y="0" width="100%" height="100%" viewbox="0 0 384 722"  preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-            <path id="smallGridPath" d="M 10 0 H 0 V 10" fill="none" stroke="lightgrey" stroke-width="0.5" />
-          </pattern>
-          <pattern id="largeGrid" width="50" height="50" patternUnits="userSpaceOnUse">
-            <rect id="largeGridRect" width="50" height="50" fill="url(#smallGrid)" />
-            <path id="largeGridPath" d="M 50 0 H 0 V 50" fill="none" stroke="lightgrey" stroke-width="2" />
-          </pattern>
-          <linearGradient id="inactiveHandleGradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="50%" stop-color="#FFFDF390" />
-            <stop offset="51%" stop-color="#18181890" />
-          </linearGradient>
-          <linearGradient id="activeHandleGradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="50%" stop-color="#DC0F0F90" />
-            <stop offset="51%" stop-color="#2251CE90" />
-          </linearGradient>
-          <linearGradient id="boardGradient" x1="0" x2="1" y1="0" y2="">
-            <stop offset="50%" stop-color="#DC0F0FB8" />
-            <stop offset="51%" stop-color="#1B46BAB8" />
-          </linearGradient>
-        </defs>
-        <g id="surface" transform="translate(0, 0)" x="0" y="0" width="100%" height="100%">
-          <rect id="grid" x="0" y="0" width="100vw" height="400" fill="url(#largeGrid)" />
+      <svg transform="translate(0,0)" x="0" y="0" id="game" viewport="0 0" x="0" y="0" width="384" height="722" viewBox="0 0 100 100" preserveAspectRatio="xMinYMin meet" xmlns="http://www.w3.org/1000/svg">
+        <g class="layer" id="layer0__surface" transform="translate(0, 0)" x="0" y="0" width="100" height="10">
+          <rect x="0" y="0" id="surface-bg" width="100" height="200" fill="#DAB542" />
         </g>
-        <g id="boardGroup" transform="translate(0, 0)" x="0" y="0"></g>
+        <g id="layer1__tiles" transform="translate(0, 0)" x="0" y="0" width="100" height="10">
+          <rect x="0" y="0" id="surface-bg" width="100" height="200" fill="#DAB542" />
+        </g>
+        <path fill="#00000080" stroke="#00000090" stroke-width="1" stroke-linecap="round" transform="rotate(90) translate(0,-130)" class="grad" d="M 5 95 C 10 0, 65 0, 95 95 S 95 100, 180 40" />
+        <!-- <g id="boardGroup" transform="translate(0, 5)" height="10" x="0" y="0"></g> -->
+        <g id="info" transform="translate(0, 0)" x="0" y="0" width="100" height="10">
+          <rect id="grid" x="0" y="0" width="100" height="10" fill="black" />
+          <text id="score" fill="#ffffff" x="100" y="0" width="100%" height="10">Suck</text>
+        </g>
+        <g x="0" y="0" class="boardTile"></g>
       </svg>
     </div>
   </div>
   <script type="text/javascript" charset="utf-8">
-    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const SVG_NS = 'http://www.w3.org/1000/svg';
   </script>
   <script src="./app.js" type="module"></script>
+  <script src="./tiles.js" type="module"></script>
 </body>
 
 </html>

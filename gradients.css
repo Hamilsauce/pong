@@ -1,0 +1,59 @@
+.grad {
+  background-image: linear-gradient(0deg, #DAB542, rgba(255, 255, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 25, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0));
+  background-blend-mode: initial,
+    color-dodge,
+    difference;
+  background-repeat: no-repeat,
+    no-repeat,
+    no-repeat;
+  background-position: bottom right,
+    left,
+    right;
+}
+
+.grad2 {
+  background-image: linear-gradient(0deg, #DAB542, rgba(255, 255, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 25, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0));
+
+  filter: hue-rotate(120deg) invert(100%) ;
+}
+
+.multi-gradients {
+  width: 100%;
+  height: 400px;
+  background-image:
+    linear-gradient(0deg, #DAB542, rgba(255, 255, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 25, 255, 0)),
+    linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0));
+  background-blend-mode: initial, color-dodge, difference;
+  background-repeat: no-repeat,
+    no-repeat,
+    no-repeat;
+  background-position: bottom right,
+    left,
+    right;
+
+  overflow: scroll;
+}
+
+.multi-gradients2 {
+  width: 100%;
+  height: 400px;
+  background-image:
+    linear-gradient(0deg, #DAB54280, rgba(255, 255, 255, 0)),
+    linear-gradient(165deg, #52829E80, rgba(255, 255, 255, 0)),
+    linear-gradient(250deg, #A0A7ADC2, rgba(255, 255, 255, 0));
+  background-blend-mode: screen, luminosity, overlay;
+  background-repeat: no-repeat,
+    no-repeat,
+    no-repeat;
+  filter: grayscale(1);
+  background-position: bottom right,
+    top left,
+    center;
+
+  overflow: scroll;
+}

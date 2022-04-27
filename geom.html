@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>new pipe</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="./geom.css" />
+</head>
+
+<body>
+    <div class="controls">
+      <div class="controls__group">
+        <label for="points">Points: <span data-label="points"></span></label>
+        <input id="points" type="range" min="8" max="60" step="2" data-slider="points">
+      </div>
+      <div class="controls__group">
+        <label for="rad">Inner radius: <span data-label="inner-radius"></span></label>
+        <input id="rad" type="range" min="20" max="120" step="5" data-slider="inner-radius">
+      </div>
+    </div>
+
+    <div class="shape"></div>
+  <!-- <div class="app">
+  </div> -->
+  <script src="./geom.js" type="module"></script>
+</body>
+
+</html>

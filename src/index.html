@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>pooper</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="app-body">
+      <svg id="game" width="3000" height="3000" viewport="0 0" viewBox="-1530 -2630 24000 24000" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+            <path id="smallGridPath" d="M 8 0 H 0 V 8" fill="#ADA9941C" />
+          </pattern>
+          <pattern id="largeGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+            <rect class="_draggable" id="largeGridRect" width="80" height="80" fill="url(#smallGrid)" />
+            <path class="_draggable" id="largeGridPath" d="M 80 0 H 0 V 80" fill="#C7C7C710" stroke="lightgrey" stroke-width="2" />
+          </pattern>
+          <pattern id="rulerMarkers" width="40" height="40" patternUnits="userSpaceOnUse">
+            <rect id="largeGridRect" width="40" height="40" fill="#BBBBBB99" />
+            <path id="largeGridPath" d="M 40 0 H 0 V 40" fill="#43434390" stroke="#00000020" stroke-width="2" />
+          </pattern>
+          <linearGradient id="handleGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="50%" stop-color="#FFFDF3" />
+            <stop offset="51%" stop-color="#18181890" />
+          </linearGradient>
+        </defs>
+
+        <g id="surface" class="board-layer" data-layer-index="0" transform="translate(0, 0)" x="0" y="0">
+          <rect id="grid" x="-1500" y="-1500" width="3000" height="3000" fill="url(#largeGrid)" />
+
+          <g id="guy" data-type="actor" transform="translate(0, 0)" class="" x="0" y="0">
+          
+            <circle class="actor-shape" cx="0" cy="0" r="40" fill="#434343" stroke-width="3" />
+          </g>
+
+          <g id="paths" class="layer">
+            <path id="linepath" d=" M 424.5431,548.3248 421.9118,240.2657" style="fill:none;stroke:#000000;stroke-width:1;stroke-opacity:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dashoffset:0;" />
+          </g>
+       
+          <!-- <g id="leftPaddleGroup" class="graphic-object" transform="translate(0, 0)" x="10" y="200" width="25" height="50">
+            <rect class="draggable" id="leftPaddle" class="paddle" x="25" y="200" width="25" height="50" fill="#434343" />
+          </g> -->
+          <!-- <g id="rightPaddleGroup" class="graphic-object" transform="translate(0, 0)" x="10" y="200" width="25" height="50">
+            <rect class="draggabl" id="rightPaddle" class="paddle" y="200" x="335" width="25" height="50" fill="#434343" />
+          </g> -->
+
+        </g>
+
+        <g id="active-objects" class="board-layer" data-layer-index="1" transform="translate(0, 0)" x="0" y="0"></g>
+
+        <g id="hud" class="board-layer" data-layer-index="5" x="0" y="0">
+          <g id="omnibutton" data-type="hud-control" transform="translate(8, 648)" class="hud-element" x="0" y="0">
+            <rect rx="30" class="" id="omnibutton-shape" c+x="0" _cy="0" _r="40" width="60" height="60" fill="#434343" filcl="url(#rulerMarkers)" stroke-width="3" />
+            <path stroke-width="1.2" stroke="" transform="scale(1.3) translate(11,11)" id="omnibutton-icon-filled" d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"></path>
+          </g>
+        </g>
+      </svg>
+      <!-- <svg width="24" height="24">
+        <path d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"></path>
+      </svg> -->
+      <!-- <svg width="24" height="24">
+        <path id="omnibutton-icon-outlined" d="M22.61,19L13.53,9.91C14.46,7.57 14,4.81 12.09,2.91C9.79,0.61 6.21,0.4 3.66,2.26L7.5,6.11L6.08,7.5L2.25,3.69C0.39,6.23 0.6,9.82 2.9,12.11C4.76,13.97 7.47,14.46 9.79,13.59L18.9,22.7C19.29,23.09 19.92,23.09 20.31,22.7L22.61,20.4C23,20 23,19.39 22.61,19M19.61,20.59L10.15,11.13C9.54,11.58 8.86,11.85 8.15,11.95C6.79,12.15 5.36,11.74 4.32,10.7C3.37,9.76 2.93,8.5 3,7.26L6.09,10.35L10.33,6.11L7.24,3C8.5,2.95 9.73,3.39 10.68,4.33C11.76,5.41 12.17,6.9 11.92,8.29C11.8,9 11.5,9.66 11.04,10.25L20.5,19.7L19.61,20.59Z"></path>
+      </svg> -->
+
+
+    </div>
+  </div>
+
+
+
+  <script src="CONSTANTS.js"></script>
+  <script src="./main.js" type="module"></script>
+  <!-- <script src="/tiles.js" type="module"></script> -->
+</body>
+
+</html>

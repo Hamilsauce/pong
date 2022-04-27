@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg  viewBox="-25 -25 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path id="center" d="M 25 0 C 25 13.807 13.807 25 0 25 C -13.807 25 -25 13.807 -25 0 C -25 -13.807 -13.807 -25 0 -25 C 13.807 -25 25 -13.807 25 0 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" bx:origin="0.5 0.5" />
+</svg>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 55 100 C 55 102.761 52.761 105 50 105 C 47.239 105 45 102.761 45 100 C 45 97.239 47.239 95 50 95 C 52.761 95 55 97.239 55 100 Z" id="" clip-pasth="url(#circle)" stroke="#00000099" stroke-width="0.75" style="fill: rgba(255, 255, 255, 0);" />
+  <line id="axis-left" x1="0" x2="45" y1="100" y2="100" stroke="#00000090" stroke-width="0.75" />
+  <line id="xaxis-right" x1="55" x2="100" y1="100" y2="100" stroke="#00000090" stroke-width="0.75" style="fill: rgb(212, 27, 27);" />
+  <line id="yaxis-top" x1="50" x2="50" y1="0" y2="95" stroke="#00000099" stroke-width="0.75" />
+  <line id="yaxis-bottom" x1="50" x2="50" y1="105" y2="200" stroke="#00000099" stroke-width="0.75" style="fill: rgb(212, 27, 27);" />
+</svg>

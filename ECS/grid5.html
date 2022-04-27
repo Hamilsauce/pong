@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>new pipe</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="./i5.css" />
+</head>
+
+<body>
+  <div id="app">
+    <div id="svg-container">
+      <svg data-type="canvas" id="svg" width="376" height="376" viewport="0 0" viewBox="-2.5 -2.5 5 5" preserveAspectRatio="xMinYMin meet" x="0" y="0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+        <defs></defs>
+        <g id="scene-graph" transform="translate(-2.5,-2.5) scale(1) ">
+
+          <g transform="translate(0,0)" id="surface" class="layer" data-rows="5" data-columns="5">
+            <!-- <circle cx="0.5" cy="0.5" class="point" r="0.8"></circle> -->
+            <path id="grid-face" d=" m 0,0 5,0 0,5 -5,0 0,-5 0,0 Z"></path>
+
+            <g class="tile" id="tile-r0c4" transform="translate(0,0)" data-row="0" data-column="0">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle fill="pink" cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c4" transform="translate(1,0)" data-row="1" data-column="0">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c4" transform="translate(2,0)" data-row="2" data-column="0">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c3" transform="translate(3,0)" data-row="3" data-column="0">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c4" transform="translate(4,0)" data-row="4" data-column="0">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r1c0" transform="translate(0,1)" data-row="0" data-column="1">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r1c3" transform="translate(1,1)" data-row="1" data-column="1">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r1c4" transform="translate(2,1)" data-row="2" data-column="1">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(3,1)" data-row="3" data-column="1">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c1" transform="translate(4,1)" data-row="4" data-column="1">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c2" transform="translate(0,2)" data-row="0" data-column="2">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(1,2)" data-row="1" data-column="2">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(2,2)" data-row="2" data-column="2">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" data-barrier="true" id="tile-r0c0" transform="translate(3,2)" data-row="3" data-column="2">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(4,2)" data-row="4" data-column="2">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(0,3)" data-row="0" data-column="3">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(1,3)" data-row="1" data-column="3">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(2,3)" data-row="2" data-column="3">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(3,3)" data-row="3" data-column="3">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(4,3)" data-row="4" data-column="3">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(0,4)" data-row="0" data-column="4">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(1,4)" data-row="1" data-column="4">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(2,4)" data-row="2" data-column="4">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" data-barrier="true" id="tile-r0c0" transform="translate(3,4)" data-row="3" data-column="4">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1=" 1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+
+            <g class="tile" id="tile-r0c0" transform="translate(4,4)" data-row="4" data-column="4">
+              <rect class="tile-face" x="0" y="0" width="1" height="1"></rect>
+              <g class="tile-edges">
+                <line class="edge" x1="0" x2="1" y1="0" y2="0"></line>
+                <line class="edge" x1="1" x2="1" y1="0" y2="1"></line>
+                <line class="edge" x1="1" x2="0" y1="1" y2="1"></line>
+                <line class="edge" x1="0" x2="0" y1="1" y2="0"></line>
+              </g>
+              <g class="tile-points">
+                <circle fill="red" cx="0" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="0" class="vertex" r="0.08"></circle>
+                <circle cx="1" cy="1" class="vertex" r="0.08"></circle>
+                <circle cx="0" cy="1" class="vertex" r="0.08"></circle>
+                <!-- <circle cx="0.5" cy="0.5" class="point" r0="0.08"></circle> -->
+                <circle cx="0.5" cy="0.5" class="point" r="0.08"></circle>
+              </g>
+            </g>
+          </g>
+          <g id="grid-objects" transform="translate(0,0)">
+
+            <!-- <g id="squiggly-layer">
+            <path transform=" id="squiggly" d="
+            M -10,-10
+            Q 
+            -5,100
+            100,-5
+            0,15
+          100,-5
+          0,-100
+            100,100" style="fill:none;stroke:#000000;stroke-width:1;stroke-opacity:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dashoffset:0;" />
+          </g> -->
+            <g id="path-plot">
+              <g id="plot-segment" transform="rotate(0)">
+                <path class="path-segment" transform="translate(1,1)" d=" M 0,0 0,1 1 1,1" style="fill:none;stroke-width:0.04;stroke-opacity:1;stroke-linecap:butt;stroke-miterlimit:4;stroke-dashoffset:0;" />
+                <circle class="way-point" r="0.1"></circle>
+                <circle class="point way-point" transform="translate(3,3)" r="0.1"></circle>
+              </g>
+              <g id="plot-segment vector" transform="translate(0,0">
+                <path class="path-segment" transform="translate(0,0)" d=" M 0,0 0,1 " />
+                <circle class="point way-point" transform="translate(0,0)" r="0.1"></circle>
+                <circle class="point way-point" transform="translate(0,1)" r="0.1"></circle>
+              </g>
+              <g id="plot-segment vector" transform="translate(1,1)">
+                <path class="path-segment" transform="translate(0,0)" d=" M 0,0 0,1 1 1,1 " />
+                <circle class="point way-point" transform="translate(0,0)" r="0.1"></circle>
+                <circle class="point way-point" transform="translate(1,1)" r="0.1"></circle>
+              </g>
+            </g>
+            <g id="actors" >
+              <g class="actor" id="john">
+                <circle transform="translate(0,0) scale(0.8)" class="actor-shape" r="0.5"></circle>
+              </g>
+            </g>
+          </g>
+          <!-- <g id="hud" class="board-layer" data-layer-index="5" x="0" y="0">
+            <g id="omnibutton" data-type="hud-control" transform="translate(8 648)" class="hud-element" x="0" y="0">
+              <rect rx="30" class="" id="omnibutton-shape" c+x="0" _cy="0" _r="40" width="60" height="60" fill="#434343" filcl="url(#rulerMarkers)" stroke-width="3" />
+              <path stroke-width="1.2" stroke="" transform="scale(1.3) translate(11,11)" id="omnibutton-icon-filled" d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"></path>
+            </g>
+          </g> -->
+
+        </g>
+      </svg>
+    </div>
+    <div id="model-container">
+      <div id="model-grid">
+        <div contenteditable="true" class="model-cell xInput">5</div>
+        <div contenteditable="true" class="model-cell row1 yInput">5</div>
+        <div class="model-cell submit">
+          <button id="point-submit">Move</button>
+        </div>
+        <!--     <div class="model-cell">1 </div>
+           <div class="model-cell">1 </div>
+           <div class="model-cell">1 </div>
+           <div class="model-cell">1 </div>
+           <div class="model-cell">1 </div>
+           <div class="model-cell">1 </div> 
+           <div class="model-cell">1 </div>
+         -->
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+  </script>
+  <script src="./i5.js" type="module"></script>
+  <!-- <script src="/ECS/i5-2.js" type="module"></script> -->
+  <!-- <script src="/ECS/model-grid.js" type="module"></script> -->
+</body>
+
+</html>

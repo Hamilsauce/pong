@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+  transform-origin: 50% 50%;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-body {
+  width: 100%;
+  height: 100%;
+}
+
+#controls {}
+
+.slider-group {
+  border: 1px solid black;
+  z-index: 500;
+}
+
+.slider-bg {
+  /* RECT #35353E*/
+  fill: #9A9A9AB8;
+  stroke: #00000050;
+  stroke-width: 1px;
+}
+
+.slider-track {
+  /* LINE */
+  fill: #7F7F7F;
+  stroke-width: 2.5px;
+  stroke: #616364;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  border-radius: 6px;
+  /* width: 100%; */
+  /* height: 100%; */
+
+}
+
+.slider-handle {
+  fill: #DFD9D847;
+  fill: #D7D7D7;
+  stroke: #fff;
+  /* stroke-width: 2px; */
+  /* filter: invert(100%) drop-shadow(0 0 2px #EDEDEDC4); */
+}
+
+.at-origin {
+  fill: #ADA9941C;
+  filter: invert(100%);
+  /* transition: 0.1s; */
+}
+
+#rulerMarkers {}
+
+#largeGridRect {
+  /* fill: rgba(24, 55, 117, 1); */
+}
+
+#largeGridRect.invert {
+  fill: rgba(255, 255, 255, 0.74);
+  filter: contrast(93%);
+
+}
+
+#largeGridPath {
+  fill: #EAEAEA6E;
+}
+
+.darkMode #largeGridRect {
+  fill: #D5D5D845;
+  fill: #35353E;
+}
+
+.ruler {
+  transform-origin: center;
+  box-shadow: 2px, 2px, 10px #6A4879A8;
+  filter: drop-shadow(0px -1px 4px #1111134D);
+
+}
+
+
+
+
+#ruler-origin {
+  fill: #37343D;
+  rx: 50%;
+  stroke: #F0F0F0A3;
+  stroke-width: 1.5;
+  filter: drop-shadow(0px -1px 4px #1111134F);
+}
+
+#ruler-top {
+  fill: #2E63D6;
+  fill: #D3BA36;
+}
+
+svg {
+  /* background: #F1F1F1; */
+  /* filter: invert(100%); */
+}
+
+#ruler-left {}
+
+#surface {
+  fill: rgba(241, 242, 244, 1);
+  stroke: #4F4F4F;
+  stroke-width: 2px;
+  z-index: 50;
+  transform-origin: 150% 50%;
+}
+
+#surface.invert {
+  filter:
+    invert(100%) contrast(150%);
+}
+
+.text-node {
+  stroke: #FFFFFF;
+  fill: #252222;
+  fill: #F0F0F0;
+  font-weight: 600;
+  font-size: 18px;
+  display: inline-block;
+  outline: none;
+  filter: invert(80%);
+}
+
+svg,
+svg * {
+  touch-action: none;
+}
+
+svg .invert {
+  fill: #EAEAEA08;
+
+}
+
+#omnibutton-icon-filled {
+  transition-delay: 2s;
+  transition: 0.1s;
+  filter: drop-shadow(0px 0px 8px #FFF0C0A1);
+  stroke-width: 0.5px;
+  fill: #434343;
+
+  /* height 0.4s,y 0.4s,  rx 0.4s, width 0.4s */
+  ;
+}
+
+#omnibutton-shape {
+  transition-delay: 5s;
+  transition: 0.25s;
+  stroke: #434343;
+  filter: drop-shadow(0px 0px 6px #A4A4A4);
+  fill: #E9B542;
+
+  /* height 0.4s,y 0.4s,  rx 0.4s, width 0.4s */
+  ;
+}
