@@ -11,10 +11,10 @@ const boardattrs = {
   stroke: null,
 }
 
-
 export class Scoreboard extends Spatial {
   constructor(parentSVG, attrs, input$) {
     super({ parentSVG, type: 'rect', attrs, isContainer: false })
+
     this.bg = this.root
     this.root = document.createElementNS(SVG_NS, 'g');
     this.root.id = 'scoreboard'
@@ -22,48 +22,53 @@ export class Scoreboard extends Spatial {
     this.root.append(this.bg);
 
     this.input$ = input$;
+
     this.displays = {
-      left: this.createDisplay('left-score', 0, ), //this.input.bind(this)),
-      right: this.createDisplay('right-score', 0, ) //this.input.bind(this))
+      left: this.createDisplay('left-score', 0, ),
+      right: this.createDisplay('right-score', 0, )
     }
-    console.log('score board', this);
   }
 
   input(side) {
     if (!['LEFT', 'RIGHT'].includes(side)) return;
-    side = this.displays[side.toLowerCase()];
-    side.textContent = +(side.textContent + 1)
 
+    side = this.displays[side.toLowerCase()];
+
+    side.textContent = +(side.textContent + 1);
   }
 
   createDisplay(name, value, callback) {
     const display = document.createElementNS(SVG_NS, 'g');
-    const bg = document.createElementNS(SVG_NS, 'rect');
-
-    if (name.includes('left')) {
-      display.setAttribute('transform', 'translate(15, 5)');
-    } else display.setAttribute('transform', 'translate(352, 5)');
-
-    bg.width.baseVal.value = 40;
-    bg.height.baseVal.value = 40;
-    // bg.x.baseVal.value = 10;
-    // bg.y.baseVal.value = 10;
+    const bg = document.createElementNS(SVG_NS, 'circle');
     const tn = this.createText(0, callback);
+
+    bg.r.baseVal.value = 22.5;
 
     display.id = name;
     display.classList.add('score-display')
-    display.append(bg, tn)
-    // tn.setAttributeNS(null,'text-anchor', 'middle')
+    display.append(bg)
+    display.append(tn)
+
+    if (name.includes('left')) {
+      display.setAttribute('transform', 'translate(100, 25)');
+    }
+    else display.setAttribute('transform', 'translate(312, 25)');
+
     this.root.append(display);
   }
 
   createText(value, callback) {
     const textNode = document.createElementNS(SVG_NS, "text");
     const text = document.createTextNode(value);
+    const offsetY = 22.5 / 3;
+
+    textNode.classList.add('score-value')
+    textNode.setAttribute('transform', `translate(0, ${offsetY})`);
 
     if (callback) callback(text)
+
     textNode.appendChild(text);
+
     return textNode;
   }
-
-} { Scoreboard }
+}

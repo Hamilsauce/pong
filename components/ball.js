@@ -1,23 +1,19 @@
 import { Movable } from './Movable.js';
 
 export class Ball extends Movable {
-  constructor({ parentSVG, boardGroup, paddles$, attrs }) { //= { fill: 'red', name: 'ball', input$: null, boardHeight: 400 } }) {
+  constructor({ parentSVG, boardGroup, paddles$, attrs }) {
     super({ parentSVG, type: 'circle', attrs });
+
     this.boardGroup = boardGroup;
     this.paddles$ = paddles$
-    this.board = document.querySelector('#boardBackground')
+    this.board = document.querySelector('#boardBackground');
     this.transform;
     this.currentPosition;
     this.coord;
-    this.directionX = 1
+    this.directionX = 1;
     this.directionY = 0;
 
-    this.anim = requestAnimationFrame(this.animate.bind(this))
-
-    setInterval(() => {
-
-      console.warn('BALL', this);
-    }, 2000)
+    this.anim = requestAnimationFrame(this.animate.bind(this));
   }
 
   animate() {
@@ -32,17 +28,12 @@ export class Ball extends Movable {
     return ({ x = this.changeX, y = this.changeY, }) => this.directionX === 1 ?
     {
       // x: this.changeX -= 7+ ((this.changeX) / 66),
-      x: this.changeX -= 5, //- ((this.changeX)),
+      x: this.changeX -= 7,
       y: this.changeY += this.directionY
-    } :
-    {
-      // x: this.changeX += 5- ((this.changeX) / 66),
-      x: this.changeX += 5,// + ((this.changeX)),
+    } :{
+      // x: this.changeX += 7- ((this.changeX) / 77),
+      x: this.changeX += 7,
       y: this.changeY += this.directionY
     }
   }
-}
-
-{
-  Ball
 }

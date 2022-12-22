@@ -89,7 +89,3 @@ export class Spatial {
   
   set fill(val) { this.root.setAttribute('fill', val) }
 }
-
-{
-  Spatial
-}

@@ -70,7 +70,3 @@ export class Paddle extends Collidable {
     this.position$.next(this.hitbox)
   }
 }
-
-{
-  Paddle
-}

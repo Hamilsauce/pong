@@ -60,7 +60,7 @@ export class Game {
       input$: null,
       attrs: {
         classList: ['ball'],
-        r: 8,
+        r: 10,
         cx: this.board.centroid.x,
         cy: this.board.centroid.y,
         boardHeight: 400,
@@ -70,21 +70,6 @@ export class Game {
 
     this.scoreboard = new Scoreboard(this.root, { id: 'scoreboard', classList: ['scoreboard'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 55, fill: "#292A2F" })
     this.root.appendChild(this.scoreboard.root);
-
-    // this.scoreboard = new Scoreboard({
-    //   parentSVG: this.root,
-    //   // boardGroup: this.boardGroup,
-    //   // paddles$: this.paddles$,
-    //   input$: null,
-    //   attrs: {
-    //     classList: ['ball'],
-    //     r: 8,
-    //     cx: this.board.centroid.x,
-    //     cy: this.board.centroid.y,
-    //     boardHeight: 400,
-    //     boardWidth: 384
-    //   }
-    // })
 
     this.boardGroup.appendChild(this.ball.root);
 
@@ -175,6 +160,7 @@ export class Game {
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
     }
+    
     else if (
       ball.right >= paddleRight.left &&
       ball.bottom >= paddleRight.top &&
@@ -190,30 +176,30 @@ export class Game {
 
     // BOARD collision
     else if (this.ball.hitbox.left <= this.board.hitbox.left) {
-      boardCollision = true
+      const score = document.querySelector('#right-score text')
+      boardCollision = true;
 
       this.ball.directionX = -1;
-      const score = document.querySelector('#right-score text')
       score.textContent = (+score.textContent || 0) + 1
     }
+    
     else if (this.ball.hitbox.right >= this.board.hitbox.right) {
-      boardCollision = true
+      const score = document.querySelector('#left-score text')
+      
+      boardCollision = true;
 
       this.ball.directionX = 1;
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-      const score = document.querySelector('#left-score text')
-      score.textContent = (+score.textContent || 0) + 1
-      
+    
+      score.textContent = (+score.textContent || 0) + 1;
     }
+    
     else if (ball.bottom >= this.board.hitbox.bottom) {
-      boardCollision = true
-
       this.ball.directionY = -1;
     }
+    
     else if (ball.top <= this.board.hitbox.top) {
-      boardCollision = true
-
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
       this.ball.directionY = 1;
     }
