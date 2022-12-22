@@ -7,7 +7,7 @@ import { Scoreboard } from './components/scoreboard.js';
 const { combineLatest, iif, Subject, interval, of , fromEvent, merge, from } = rxjs;
 const { mergeAll, groupBy, sampleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter } = rxjs.operators;
 
-const CONSTS = {
+const Constants = {
   boardCollision: {
     LEFT: 'LEFT',
     RIGHT: 'RIGHT',
@@ -23,13 +23,32 @@ export class Game {
 
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
-    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 400, fill: "url(#boardGradient)" })
+    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 400, fill: "url(#boardGradient)" });
     this.boardGroup.appendChild(this.board.root)
 
     this.sliders = sliderConfig ? sliderConfig.reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {}) : null;
 
-    this.paddleLeft = new Paddle(this.root, this.boardGroup, 'leftPaddle', { input$: this.sliders.left.value$, y: this.board.centroid.y, side: 'left', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, rx: 8 });
-    this.paddleRight = new Paddle(this.root, this.boardGroup, 'rightPaddle', { input$: this.sliders.right.value$, y: this.board.centroid.y, side: 'right', height: 100, width: 25, boardHeight: 400, boardWidth: window.innerWidth, rx: 8 });
+    this.paddleLeft = new Paddle(this.root, this.boardGroup, 'leftPaddle', {
+      input$: this.sliders.left.value$,
+      y: this.board.centroid.y,
+      side: 'left',
+      height: 100,
+      width: 25,
+      boardHeight: 400,
+      boardWidth: window.innerWidth,
+      rx: 8
+    });
+
+    this.paddleRight = new Paddle(this.root, this.boardGroup, 'rightPaddle', {
+      input$: this.sliders.right.value$,
+      y: this.board.centroid.y,
+      side: 'right',
+      height: 100,
+      width: 25,
+      boardHeight: 400,
+      boardWidth: window.innerWidth,
+      rx: 8
+    });
 
     this.ball = new Ball({
       parentSVG: this.root,
@@ -44,9 +63,11 @@ export class Game {
         boardHeight: 400,
         boardWidth: 384
       }
-    })
+    });
+
     this.scoreboard = new Scoreboard(this.root, { id: 'scoreboard', classList: ['scoreboard'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 50, fill: "#00ff00" })
     this.root.appendChild(this.scoreboard.root);
+
     // this.scoreboard = new Scoreboard({
     //   parentSVG: this.root,
     //   // boardGroup: this.boardGroup,
@@ -63,9 +84,9 @@ export class Game {
     // })
 
     this.boardGroup.appendChild(this.ball.root);
-    
-    this.boardGroup.setAttribute('transform', 'translate(0, 50)')
-// console.log('boardGroup', boardGroup)
+
+    this.boardGroup.setAttribute('transform', 'translate(0, 50)');
+
     this.rootTransforms = this.root.transform.baseVal;
 
     if (this.rootTransforms.length === 0) {
@@ -90,10 +111,19 @@ export class Game {
         return { paddleLeft, paddleRight, ball }
       }),
       map(this.detectCollision.bind(this)),
-      // tap(this.scoreboard.input.bind(this)),
     );
 
-    this.scene$.subscribe() //  this.detectCollision.bind(this))
+    this.scene$.subscribe();
+  }
+
+  convertCoords(x, y, elem) {
+    const offset = this.root.getBoundingClientRect();
+    const matrix = elem.getScreenCTM();
+
+    return {
+      x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
+      y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
+    };
   }
 
   convertCoords(x, y, elem) {
@@ -108,14 +138,19 @@ export class Game {
 
   create(parent, name, attrs, text) {
     const el = document.createElementNS(this.root.namespaceURI, name);
+
     for (let attr in attrs) {
       if (!attrs.hasOwnProperty(attr)) continue;
 
       const splitProp = attr.split(':');
+
       if (splitProp[1]) el.setAttributeNS(parent.getAttribute('xmlns:' + splitProp[0]), splitProp[1], attrs[attr]);
+
       else el.setAttribute(attr, attrs[attr]);
     }
+
     if (text) el.appendChild(document.createTextNode(text));
+
     return parent.appendChild(el);
   }
 
@@ -125,47 +160,41 @@ export class Game {
     let boardCollision = null
 
     if (
-      (ball.left < paddleLeft.right &&
-        (ball.bottom >= paddleLeft.top && ball.top <= paddleLeft.bottom))
+      ball.left <= paddleLeft.right &&
+      ball.bottom >= paddleLeft.top &&
+      ball.top <= paddleLeft.bottom
     ) {
-      const rawPOI = ball.top + (ball.center)
+      const rawPOI = ball.top + (ball.center);
 
       const POIR = -((paddleLeft.top - paddleLeft.bottom) - (rawPOI - paddleLeft.bottom)) - 50;
 
-      this.ball.directionX = -1
+      this.ball.directionX = -1;
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-      console.warn('BALL COLLISION [LEFT]: DIR Y', this.ball.directionY);
     }
     else if (
       ball.right >= paddleRight.left &&
-      (ball.bottom >= paddleRight.top && ball.top <= paddleRight.bottom)
+      ball.bottom >= paddleRight.top &&
+      ball.top <= paddleRight.bottom
     ) {
-      const rawPOI = ball.centerY
+      const rawPOI = ball.centerY;
       const POIR = -((paddleRight.top - paddleRight.bottom) - (rawPOI - paddleRight.bottom)) - 50
-      this.ball.directionX = 1
+
+      this.ball.directionX = 1;
+
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-      // console.warn('BALL COLLISION [RIGHT]: DIR Y', this.ball.directionY);
     }
 
     // BOARD collision
-    if (this.ball.hitbox.left <= this.board.hitbox.left) {
-      boardCollision = CONSTS.boardCollision.LEFT
+    else if (this.ball.hitbox.left <= this.board.hitbox.left) {
+      boardCollision = Constants.boardCollision.LEFT
       this.ball.directionX = -(this.ball.directionX)
-      console.log('LEFT');
+    }
+    else if (this.ball.hitbox.right >= this.board.hitbox.right) {
+      boardCollision = Constants.boardCollision.RIGHT
+      this.ball.directionX = -(this.ball.directionX)
 
-    } else if (this.ball.hitbox.right >= this.board.hitbox.right) {
-      boardCollision = CONSTS.boardCollision.RIGHT
-      this.ball.directionX = -(this.ball.directionX)
-      // this.ball.directionX = -(this.ball.directionX)
-      // this.ball.directionX = 'right'
-      // console.log('BALL DIRECTION X', this.ball.directionX)
-      // console.log('BALL DIRECTION Y', this.ball.directionY)
-      // console.log('this.ball.directionX', this.ball.directionX)
-      // console.log('this.ballp.right) {', this.ball.hitbox.right);
-      // console.log('this.board.hitbox.right) {', this.board.hitbox.right);
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-      // console.log('RIGHT');
     }
     else if (ball.bottom > this.board.hitbox.bottom) {
       this.ball.directionY = -this.ball.directionY
@@ -201,17 +230,6 @@ export class Game {
     requestAnimationFrame(this.animate.bind(this))
   }
 
-
-
-  convertCoords(x, y, elem) {
-    const offset = this.root.getBoundingClientRect();
-    const matrix = elem.getScreenCTM();
-
-    return {
-      x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
-      y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
-    };
-  }
   makeAbsoluteContext(element, svgDocument) {
     return function(x, y) {
       const offset = svgDocument.getBoundingClientRect();
