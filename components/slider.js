@@ -78,7 +78,7 @@ export class SliderGroup {
 
     if (this.handleTransforms.length === 0) {
       this.sliderTranslate = this.parentSvg.createSVGTransform();
-      this.sliderTranslate.setTranslate(this.config.x, this.config.y+50);
+      this.sliderTranslate.setTranslate(this.config.x, this.config.y+25);
       this.sliderTransforms.insertItemBefore(this.sliderTranslate, 0);
 
       this.handleScale = this.parentSvg.createSVGTransform();
