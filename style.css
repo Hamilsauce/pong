@@ -128,5 +128,68 @@ body {
 
 #scoreboard {
   fill: #2B2B30;
+}
+
+#left-score {
+  /* transform: translate(5, 5); */
+}
+
+#right-score {
+  /* transform: translate(407, 5); */
+}
+
+.score-display rect {
+  /* fill: #1626D9; */
+  width: 42px;
+  height: 42px;
+  rx: 50%;
+  stroke: rgba(231, 231, 231, 1);
+  stroke-width: 3.25px;
+  /* y: 5px; */
+
   /* filter: contrast(130%); */
 }
+
+.score-display text {
+  fill: #1626D9;
+  /* width: 40px; */
+  /* height: 40px; */
+  /* filter: contrast(130%); */
+  fill: #F3F3F3;
+  /* stroke: #F3F3F3; */
+  /* transform-origin: center center; */
+  transform: translate(3.20%, 3.9%);
+  font-size: 28px;
+  font-weight: 700;
+  /* text-anchor: middle; */
+  /* dominant-baseline: middle; */
+}
+
+#left-score rect {
+  fill: rgba(213, 56, 56, 1);
+  /* width: 40px; */
+  /* height: 40px; */
+  /* x: 5px; */
+
+  /* filter: contrast(130%); */
+}
+
+/* #left-score text {
+  width: 40px;
+  height: 40px;
+  filter: contrast(130%);
+} */
+
+#right-score rect {
+  fill: rgba(27, 70, 186, 1);
+  /* x: 370px; */
+  /* filter: contrast(130%); */
+}
+
+/* #right-score text {
+  fill: #F3F3F3;
+  stroke: #F3F3F3;
+  width: 40px;
+  height: 40px;
+  filter: contrast(130%);
+} */

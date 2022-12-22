@@ -68,7 +68,7 @@ export class Game {
       }
     });
 
-    this.scoreboard = new Scoreboard(this.root, { id: 'scoreboard', classList: ['scoreboard'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 50, fill: "#00ff00" })
+    this.scoreboard = new Scoreboard(this.root, { id: 'scoreboard', classList: ['scoreboard'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 55, fill: "#292A2F" })
     this.root.appendChild(this.scoreboard.root);
 
     // this.scoreboard = new Scoreboard({
@@ -193,6 +193,8 @@ export class Game {
       boardCollision = true
 
       this.ball.directionX = -1;
+      const score = document.querySelector('#right-score text')
+      score.textContent = (+score.textContent || 0) + 1
     }
     else if (this.ball.hitbox.right >= this.board.hitbox.right) {
       boardCollision = true
@@ -200,6 +202,9 @@ export class Game {
       this.ball.directionX = 1;
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
+      const score = document.querySelector('#left-score text')
+      score.textContent = (+score.textContent || 0) + 1
+      
     }
     else if (ball.bottom >= this.board.hitbox.bottom) {
       boardCollision = true
@@ -217,7 +222,7 @@ export class Game {
       this.root.dataset.invert = this.root.dataset.invert === 'true' ? false : true;
 
       setTimeout(() => {
-      this.root.dataset.invert = this.root.dataset.invert === 'true' ? false : true;
+        this.root.dataset.invert = this.root.dataset.invert === 'true' ? false : true;
       }, 200)
     }
 
