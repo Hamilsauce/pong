@@ -25,7 +25,7 @@ export class Game {
 
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
-    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 400, fill: "url(#boardGradient)" });
+    this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: 412, height: 400, fill: "url(#boardGradient)" });
     this.boardGroup.appendChild(this.board.root)
 
     this.sliders = options.sliderConfig ? options.sliderConfig.reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {}) : null;
@@ -38,7 +38,7 @@ export class Game {
       height: 100,
       width: 25,
       boardHeight: 400,
-      boardWidth: window.innerWidth,
+      boardWidth: 412,
       rx: 8
     });
 
@@ -49,7 +49,7 @@ export class Game {
       height: 100,
       width: 25,
       boardHeight: 400,
-      boardWidth: window.innerWidth,
+      boardWidth: 412,
       rx: 8
     });
 

@@ -50,9 +50,9 @@ export class Scoreboard extends Spatial {
     display.append(tn)
 
     if (name.includes('left')) {
-      display.setAttribute('transform', 'translate(100, 25)');
+      display.setAttribute('transform', 'translate(100, 27)');
     }
-    else display.setAttribute('transform', 'translate(312, 25)');
+    else display.setAttribute('transform', 'translate(312, 27)');
 
     this.root.append(display);
   }

@@ -18,15 +18,33 @@ body {
 
 #app,
 .app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
   width: 100%;
   height: 100%;
-  touch-action: none;
   overflow: hidden;
+  background: #242627;
+  filter: brightness(110%);
 }
 
 .app-body {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  
+  width: fit-content;
+  height: fit-content;
+  background: #E8E8E8;
+  border: 2px solid white;
+  touch-action: none;
+  overflow: hidden;
+  border-radius: 16px;
+  
 }
 
 #game {

@@ -15,6 +15,8 @@ export class Paddle extends Collidable {
     this.strokeWidth = attrs.strokeWidth || 4;
     this.root.setAttribute('rx', this.attrs.rx || 10)
 
+console.warn('[PADDLE] ATTRS', attrs)
+
     this.originY = (this.attrs.boardHeight / 2) - (this.attrs.height / 2) //((this.height - this.y1) - this.y) + (this.strokeWidth * 2.5)
     this.originX = this.attrs.side === 'left' ? 0 + this.attrs.width : this.attrs.boardWidth - (this.attrs.width * 2);
     this.input$ = this.attrs.input$;
