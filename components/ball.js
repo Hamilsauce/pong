@@ -15,7 +15,7 @@ export class Ball extends Movable {
     this.anim = requestAnimationFrame(this.animate.bind(this))
 
     setInterval(() => {
-      
+
       console.warn('BALL', this);
     }, 2000)
   }
@@ -31,11 +31,13 @@ export class Ball extends Movable {
     */
     return ({ x = this.changeX, y = this.changeY, }) => this.directionX === 1 ?
     {
-      x: this.changeX -= 3,
+      // x: this.changeX -= 7+ ((this.changeX) / 66),
+      x: this.changeX -= 5, //- ((this.changeX)),
       y: this.changeY += this.directionY
     } :
     {
-      x: this.changeX += 3,
+      // x: this.changeX += 5- ((this.changeX) / 66),
+      x: this.changeX += 5,// + ((this.changeX)),
       y: this.changeY += this.directionY
     }
   }
