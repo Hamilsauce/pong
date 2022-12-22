@@ -92,11 +92,9 @@ body {
 
 .text-node {
   stroke: #FFFFFF;
-  stroke-width: 0.1;
   fill: #252222;
-  
-  /* font-weight: 600; */
-  font-size: 8px;
+  font-weight: 600;
+  font-size: 18px;
   display: inline-block;
   outline: none;
   filter: invert(80%);
@@ -108,17 +106,6 @@ body {
   filter: contrast(130%) drop-shadow(0 0 2px #000000);
 }
 
-.wave{
-  fill: #3CB2A3D9;
-  filter: invert(100%);
-}
-
-.tile {
-  /* transform: translate(0,0) scale(1); */
-/* filter: invert(100%); */
-}
-.tile_content {
-  font-size: 16px;
-  transform: scale(1);
-/* filter: invert(100%); */
+#scoreboard{
+  fill: #222FBC;
 }
