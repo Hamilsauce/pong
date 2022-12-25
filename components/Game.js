@@ -68,7 +68,17 @@ export class Game {
       }
     });
 
-    this.scoreboard = new Scoreboard(this.root, { id: 'scoreboard', classList: ['scoreboard'], data: { some: 'data' }, x: 0, y: 0, width: window.innerWidth, height: 55, fill: "#292A2F" })
+    this.scoreboard = new Scoreboard(this.root, {
+      id: 'scoreboard',
+      classList: ['scoreboard'],
+      data: { some: 'data' },
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: 55,
+      fill: "#292A2F"
+    })
+
     this.root.appendChild(this.scoreboard.root);
 
     this.boardGroup.appendChild(this.ball.root);
@@ -160,7 +170,7 @@ export class Game {
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
     }
-    
+
     else if (
       ball.right >= paddleRight.left &&
       ball.bottom >= paddleRight.top &&
@@ -182,36 +192,36 @@ export class Game {
       this.ball.directionX = -1;
       score.textContent = (+score.textContent || 0) + 1
     }
-    
+
     else if (this.ball.hitbox.right >= this.board.hitbox.right) {
       const score = document.querySelector('#left-score text')
-      
+
       boardCollision = true;
 
       this.ball.directionX = 1;
 
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-    
+
       score.textContent = (+score.textContent || 0) + 1;
     }
-    
+
     else if (ball.bottom >= this.board.hitbox.bottom) {
       this.ball.directionY = -1;
     }
-    
+
     else if (ball.top <= this.board.hitbox.top) {
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
       this.ball.directionY = 1;
     }
 
     if (boardCollision) {
-      this.root.dataset.invert = this.root.dataset.invert === 'true' ? false : true;
+      this.root.dataset.invert = true;
 
       setTimeout(() => {
-        this.root.dataset.invert = this.root.dataset.invert === 'true' ? false : true;
-      }, 200)
+        this.root.dataset.invert = false;
+      }, 200);
     }
-
+    
     return boardCollision;
   }
 
