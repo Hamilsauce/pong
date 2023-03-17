@@ -24,7 +24,7 @@ export class Collidable extends Spatial {
     }
   }
 
-  getBoundingClientRect() { return this.root.getBoundingClientRect() }
+  getBoundingClientRect() { return this.self.getBoundingClientRect() }
 
   get hitbox() {
     return {

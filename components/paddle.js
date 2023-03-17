@@ -13,7 +13,7 @@ export class Paddle extends Collidable {
     this.containerGroup = document.createElementNS(SVG_NS, 'g');
     this.containerGroup.classList.add(`${id}Group`)
     this.strokeWidth = attrs.strokeWidth || 4;
-    this.root.setAttribute('rx', this.attrs.rx || 10)
+    this.self.setAttribute('rx', this.attrs.rx || 10)
 
 console.warn('[PADDLE] ATTRS', attrs)
 
@@ -25,7 +25,7 @@ console.warn('[PADDLE] ATTRS', attrs)
     this.translate
     this.coord;
 
-    this.paddleTransforms = this.root.transform.baseVal;
+    this.paddleTransforms = this.self.transform.baseVal;
 
     if (this.paddleTransforms.length === 0) {
       this.paddleTranslate = this.parentSVG.createSVGTransform();
@@ -33,8 +33,8 @@ console.warn('[PADDLE] ATTRS', attrs)
       this.paddleTransforms.insertItemBefore(this.paddleTranslate, 0);
     }
 
-    this.boardGroup.appendChild(this.root)
-    this.position$ = new BehaviorSubject(this.root.getBoundingClientRect()) //.pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.root.getBoundingClientRect())
+    this.boardGroup.appendChild(this.self)
+    this.position$ = new BehaviorSubject(this.self.getBoundingClientRect()) //.pipe(tap(x => console.log('x', x)), ) // this.position$.next(this.self.getBoundingClientRect())
     this.input$.pipe(tap(this.move.bind(this))).subscribe()
   }
 

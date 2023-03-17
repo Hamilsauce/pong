@@ -54,7 +54,7 @@ export class SliderGroup {
       ['root', this.root],
     ]);
 
-    this.root = this.getElement('root');
+    this.self = this.getElement('root');
     this.background = this.getElement('background');
     this.track = this.getElement('track');
     this.handle = this.getElement('handle');

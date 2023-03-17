@@ -15,11 +15,11 @@ export class Scoreboard extends Spatial {
   constructor(parentSVG, attrs, input$) {
     super({ parentSVG, type: 'rect', attrs, isContainer: false })
 
-    this.bg = this.root
-    this.root = document.createElementNS(SVG_NS, 'g');
-    this.root.id = 'scoreboard'
+    this.bg = this.self
+    this._self = document.createElementNS(SVG_NS, 'g');
+    this._self.id = 'scoreboard'
     this.bg.id = 'scoreboard-bg'
-    this.root.append(this.bg);
+    this._self.append(this.bg);
 
     this.input$ = input$;
 
@@ -28,7 +28,8 @@ export class Scoreboard extends Spatial {
       right: this.createDisplay('right-score', 0, )
     }
   }
-
+  get dom() { return this._self }
+  
   input(side) {
     if (!['LEFT', 'RIGHT'].includes(side)) return;
 
@@ -54,7 +55,7 @@ export class Scoreboard extends Spatial {
     }
     else display.setAttribute('transform', 'translate(312, 27)');
 
-    this.root.append(display);
+    this._self.append(display);
   }
 
   createText(value, callback) {

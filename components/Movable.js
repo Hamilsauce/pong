@@ -14,7 +14,7 @@ export class Movable extends Collidable {
     this.changeY = 0;
     this.changeX = 0;
 
-    this.position$ = new BehaviorSubject(this.root.getBoundingClientRect())
+    this.position$ = new BehaviorSubject(this.self.getBoundingClientRect())
   }
 
   translate({ x, y, cx, cy, x1, x2, y1, y2 }) { return { x: null, y: null } }
@@ -27,7 +27,7 @@ export class Movable extends Collidable {
 
   get position() { return { x: this.changeX, y: this.changeY } }
   set position({ x, y }) {
-    this.transform = this.rootTransforms.getItem(0);
-    this.rootTranslate.setTranslate(x, y)
+    this.transform = this.selfTransforms.getItem(0);
+    this.selfTranslate.setTranslate(x, y)
   }
 }

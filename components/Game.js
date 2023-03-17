@@ -4,7 +4,7 @@ import { Ball } from './ball.js';
 import { Board } from './board.js';
 import { Scoreboard } from './scoreboard.js';
 
-const { combineLatest, iif, Subject, interval, of , fromEvent, merge, from } = rxjs;
+const { combineLatest, iif, Subject, interval, of, fromEvent, merge, from } = rxjs;
 const { mergeAll, groupBy, sampleTime, mergeMap, switchMap, scan, take, takeWhile, map, tap, startWith, filter } = rxjs.operators;
 
 
@@ -26,7 +26,7 @@ export class Game {
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
     this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: 412, height: 400, fill: "url(#boardGradient)" });
-    this.boardGroup.appendChild(this.board.root)
+    this.boardGroup.appendChild(this.board.dom)
 
     this.sliders = options.sliderConfig ? options.sliderConfig.reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {}) : null;
     console.log('this.sliders', this.sliders)
@@ -79,9 +79,9 @@ export class Game {
       fill: "#292A2F"
     })
 
-    this.root.appendChild(this.scoreboard.root);
+    this.root.appendChild(this.scoreboard.dom);
 
-    this.boardGroup.appendChild(this.ball.root);
+    this.boardGroup.appendChild(this.ball.dom);
 
     this.boardGroup.setAttribute('transform', 'translate(0, 50)');
 
@@ -165,10 +165,11 @@ export class Game {
       const rawPOI = ball.top + (ball.center);
 
       const POIR = -((paddleLeft.top - paddleLeft.bottom) - (rawPOI - paddleLeft.bottom)) - 50;
+      const random = Math.random();
 
       this.ball.directionX = -1;
 
-      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
+      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10}//> 0.5 ? 1 : -1 }
     }
 
     else if (
@@ -181,7 +182,7 @@ export class Game {
 
       this.ball.directionX = 1;
 
-      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
+      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10}//> 0.5 ? 1 : -1 }
     }
 
     // BOARD collision
@@ -221,7 +222,7 @@ export class Game {
         this.root.dataset.invert = false;
       }, 200);
     }
-    
+
     return boardCollision;
   }
 
