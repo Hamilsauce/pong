@@ -22,15 +22,14 @@ export class Game {
     this._y;
     this.scene$;
     this.outOfBounds = false;
-
+    
     this.root = document.querySelector(selector);
     this.boardGroup = document.querySelector('#boardGroup');
     this.board = new Board(this.root, { id: 'boardBackground', classList: ['board', 'active'], data: { some: 'data' }, x: 0, y: 0, width: 412, height: 400, fill: "url(#boardGradient)" });
     this.boardGroup.appendChild(this.board.dom)
-
+    
     this.sliders = options.sliderConfig ? options.sliderConfig.reduce((acc, curr) => ({ ...acc, [curr.id]: new SliderGroup(this.root, undefined, curr) }), {}) : null;
-    console.log('this.sliders', this.sliders)
-
+    
     this.paddleLeft = new Paddle(this.root, this.boardGroup, 'leftPaddle', {
       input$: this.sliders.left.value$,
       y: this.board.centroid.y,
@@ -41,7 +40,7 @@ export class Game {
       boardWidth: 412,
       rx: 8
     });
-
+    
     this.paddleRight = new Paddle(this.root, this.boardGroup, 'rightPaddle', {
       input$: this.sliders.right.value$,
       y: this.board.centroid.y,
@@ -52,7 +51,7 @@ export class Game {
       boardWidth: 412,
       rx: 8
     });
-
+    
     this.ball = new Ball({
       parentSVG: this.root,
       boardGroup: this.boardGroup,
@@ -67,7 +66,7 @@ export class Game {
         boardWidth: 384
       }
     });
-
+    
     this.scoreboard = new Scoreboard(this.root, {
       id: 'scoreboard',
       classList: ['scoreboard'],
@@ -78,24 +77,23 @@ export class Game {
       height: 55,
       fill: "#292A2F"
     })
-
+    
     this.root.appendChild(this.scoreboard.dom);
-
+    
     this.boardGroup.appendChild(this.ball.dom);
-
     this.boardGroup.setAttribute('transform', 'translate(0, 50)');
-
+    
     this.rootTransforms = this.root.transform.baseVal;
-
+    
     if (this.rootTransforms.length === 0) {
       this.rootTranslate = this.root.createSVGTransform();
       this.rootTranslate.setTranslate(0, 0);
       this.rootTransforms.insertItemBefore(this.rootTranslate, 0);
     }
-
+    
     this.init();
   };
-
+  
   init() {
     this.scene$ = combineLatest(
       this.paddleLeft.position$,
@@ -105,73 +103,67 @@ export class Game {
     ).pipe(
       sampleTime(40),
       takeWhile(() => !this.outOfBounds),
-      map(({ paddleLeft, paddleRight, ball }) => {
-        return { paddleLeft, paddleRight, ball }
-      }),
+      // map(({ paddleLeft, paddleRight, ball }) => {
+      //   return { paddleLeft, paddleRight, ball }
+      // }),
       map(this.detectCollision.bind(this)),
     );
-
+    
     this.scene$.subscribe();
   }
-
+  
   convertCoords(x, y, elem) {
     const offset = this.root.getBoundingClientRect();
     const matrix = elem.getScreenCTM();
-
+    
     return {
       x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
       y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
     };
   }
-
-  convertCoords(x, y, elem) {
-    const offset = this.root.getBoundingClientRect();
-    const matrix = elem.getScreenCTM();
-
-    return {
-      x: (matrix.a * x) + (matrix.c * y) + matrix.e - offset.left,
-      y: (matrix.b * x) + (matrix.d * y) + matrix.f - offset.top
-    };
-  }
-
+  
   create(parent, name, attrs, text) {
     const el = document.createElementNS(this.root.namespaceURI, name);
-
+    
     for (let attr in attrs) {
       if (!attrs.hasOwnProperty(attr)) continue;
-
+      
       const splitProp = attr.split(':');
-
+      
       if (splitProp[1]) el.setAttributeNS(parent.getAttribute('xmlns:' + splitProp[0]), splitProp[1], attrs[attr]);
-
+      
       else el.setAttribute(attr, attrs[attr]);
     }
-
+    
     if (text) el.appendChild(document.createTextNode(text));
-
+    
     return parent.appendChild(el);
   }
-
-
+  
+  
   detectCollision({ paddleLeft, paddleRight, ball }) {
     // PADDLE collision   
     let boardCollision = false
-
+    
     if (
       ball.left <= paddleLeft.right &&
       ball.bottom >= paddleLeft.top &&
       ball.top <= paddleLeft.bottom
     ) {
       const rawPOI = ball.top + (ball.center);
-
-      const POIR = -((paddleLeft.top - paddleLeft.bottom) - (rawPOI - paddleLeft.bottom)) - 50;
+      
+      const POIR = -(
+        (paddleLeft.top - paddleLeft.bottom) -
+        (rawPOI - paddleLeft.bottom)
+      ) - 50;
+      
       const random = Math.random();
-
+      
       this.ball.directionX = -1;
-
-      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10}//> 0.5 ? 1 : -1 }
+      
+      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10 } //> 0.5 ? 1 : -1 }
     }
-
+    
     else if (
       ball.right >= paddleRight.left &&
       ball.bottom >= paddleRight.top &&
@@ -179,53 +171,53 @@ export class Game {
     ) {
       const rawPOI = ball.centerY;
       const POIR = -((paddleRight.top - paddleRight.bottom) - (rawPOI - paddleRight.bottom)) - 50
-
+      
       this.ball.directionX = 1;
-
-      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10}//> 0.5 ? 1 : -1 }
+      
+      if (this.ball.directionY === 0) { this.ball.directionY = Math.random() * 10 } //> 0.5 ? 1 : -1 }
     }
-
+    
     // BOARD collision
     else if (this.ball.hitbox.left <= this.board.hitbox.left) {
       const score = document.querySelector('#right-score text')
       boardCollision = true;
-
+      
       this.ball.directionX = -1;
       score.textContent = (+score.textContent || 0) + 1
     }
-
+    
     else if (this.ball.hitbox.right >= this.board.hitbox.right) {
       const score = document.querySelector('#left-score text')
-
+      
       boardCollision = true;
-
+      
       this.ball.directionX = 1;
-
+      
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
-
+      
       score.textContent = (+score.textContent || 0) + 1;
     }
-
+    
     else if (ball.bottom >= this.board.hitbox.bottom) {
       this.ball.directionY = -1;
     }
-
+    
     else if (ball.top <= this.board.hitbox.top) {
       if (this.ball.directionY === 0) { this.ball.directionY = Math.random() > 0.5 ? 1 : -1 }
       this.ball.directionY = 1;
     }
-
+    
     if (boardCollision) {
       this.root.dataset.invert = true;
-
+      
       setTimeout(() => {
         this.root.dataset.invert = false;
       }, 200);
     }
-
+    
     return boardCollision;
   }
-
+  
   collideOn() {
     if (this.isContainer) {
       return !(
@@ -243,13 +235,13 @@ export class Game {
       );
     }
   }
-
+  
   animate() {
     this.ballTranslate.setTranslate(this.changeX, this.changeY);
     this.position$.next(this.hitbox)
     requestAnimationFrame(this.animate.bind(this))
   }
-
+  
   makeAbsoluteContext(element, svgDocument) {
     return function(x, y) {
       const offset = svgDocument.getBoundingClientRect();
